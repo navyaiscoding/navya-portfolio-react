@@ -8,6 +8,7 @@ export interface Profile {
   linkedin: string
   linkedinUrl: string
   summary: string
+  bio: string[]
 }
 
 export interface SkillGroup {
@@ -23,22 +24,7 @@ export interface NavSearchItem {
   keywords: string
 }
 
-export const github = {
-  username: 'navyaiscoding',
-}
-
-// Formspree endpoint for the contact form. Sign up free at https://formspree.io,
-// create a form, and paste its endpoint URL here (looks like
-// 'https://formspree.io/f/xxxxxxxx'). Leave empty to fall back to a mailto link.
 export const contactFormEndpoint = ''
-
-export interface Project {
-  title: string
-  company: string
-  stack: string[]
-  description: string
-  highlights: string[]
-}
 
 export interface ExperienceEntry {
   role: string
@@ -62,10 +48,14 @@ export const profile: Profile = {
   availability: 'Full EU Work Authorization · Available Immediately',
   email: 'navyaanumula@gmail.com',
   phone: '+46 72 774 4915',
-  linkedin: 'linkedin.com/in/navya-anumula-frontend-engineer',
-  linkedinUrl: 'https://linkedin.com/in/navya-anumula-frontend-engineer',
+  linkedin: 'https://www.linkedin.com/in/navya-anumula-software-engineer/',
+  linkedinUrl: 'https://www.linkedin.com/in/navya-anumula-software-engineer/',
   summary:
     'Senior Frontend Engineer with 7 years of experience building production web and mobile applications in React, Angular, TypeScript, and React Native across banking, financial services, healthcare, and e-commerce. Skilled in frontend architecture, performance and SEO optimization, and REST API integration, with a track record of defining frontend development standards, mentoring engineers, and leading Agile delivery from sprint planning through retrospectives.',
+  bio: [
+    "I'm a frontend engineer who likes making complex systems feel simple to use. Over the past 7 years I've built and scaled production applications across banking, healthcare, and e-commerce — mostly in React, Angular, and TypeScript, with a stint in React Native for mobile banking. I care as much about how a codebase feels to work in as how the product feels to use, which is why I spend a lot of time on architecture, performance, and the small decisions that help a team move faster.",
+    "Lately I've been leaning into AI-assisted development, pairing tools like Copilot and Cursor with solid engineering fundamentals rather than treating them as a shortcut. I'm based in Stockholm with full EU work authorization, and open to senior frontend and full-stack roles.",
+  ],
 }
 
 export const skills: SkillGroup[] = [
@@ -80,9 +70,9 @@ export const skills: SkillGroup[] = [
     level: 88,
   },
   {
-    category: 'Backend & APIs',
-    items: ['Node.js', '.NET', 'GraphQL', 'REST APIs', 'SQL', 'PostgreSQL', 'JWT', 'OAuth'],
-    level: 78,
+    category: 'Testing & Quality',
+    items: ['Jest', 'Enzyme', 'React Testing Library', 'Postman', 'Accessibility (WCAG)', 'SEO', 'SonarQube'],
+    level: 90,
   },
   {
     category: 'DevOps & Tooling',
@@ -90,76 +80,35 @@ export const skills: SkillGroup[] = [
     level: 80,
   },
   {
-    category: 'Testing & Quality',
-    items: ['Jest', 'Enzyme', 'React Testing Library', 'Postman', 'Accessibility (WCAG)', 'SEO', 'SonarQube'],
-    level: 85,
+    category: 'Backend & APIs',
+    items: ['Node.js', 'GraphQL', 'REST APIs', 'SQL', 'PostgreSQL', 'JWT', 'OAuth'],
+    level: 70,
   },
   {
     category: 'AI-Assisted Development',
     items: ['GitHub Copilot', 'Cursor', 'Claude', 'LangGraph'],
-    level: 75,
+    level: 90,
   },
+]
+
+export const coreCompetencies: string[] = [
+  'Frontend Architecture & Design Systems',
+  'Performance & SEO Optimization',
+  'API Design & CMS Integration',
+  'Accessibility (WCAG) & UX Quality',
+  'Figma & Designer Collaboration',
+  'Technical Leadership & Mentoring',
+  'Stakeholder Engagement & Release Management',
+  'GenAI-Assisted Development',
 ]
 
 export const navSearchItems: NavSearchItem[] = [
   { id: 'top', label: 'Home', group: 'Sections', keywords: 'home top hero start' },
   { id: 'about', label: 'About', group: 'Sections', keywords: 'about summary bio' },
+  { id: 'competencies', label: 'Core Competencies', group: 'Sections', keywords: 'competencies strengths capabilities' },
   { id: 'skills', label: 'Skills', group: 'Sections', keywords: 'skills tech stack' },
-  { id: 'projects', label: 'Featured Projects', group: 'Sections', keywords: 'projects work case studies' },
   { id: 'experience', label: 'Experience', group: 'Sections', keywords: 'experience work history jobs' },
-  { id: 'github-activity', label: 'GitHub Activity', group: 'Sections', keywords: 'github repos code activity' },
   { id: 'contact', label: 'Contact', group: 'Sections', keywords: 'contact email message reach out' },
-]
-
-export const projects: Project[] = [
-  {
-    title: 'Healthcare Digital Platform',
-    company: 'Deloitte',
-    stack: ['Angular', 'TypeScript', 'Spartacus'],
-    description:
-      'Delivered two consecutive Angular releases for a US-based healthcare digital platform, building intuitive, production-ready customer workflows.',
-    highlights: [
-      'Implemented a Bulk Order feature enabling users to add up to 10,000 items to cart via Excel upload.',
-      'Led end-to-end delivery of invoice management: search, sorting, download, printing, export, and chargeback details.',
-      'Maintained 88% test coverage using React Testing Library assisted by GitHub Copilot, improving release confidence.',
-    ],
-  },
-  {
-    title: 'Licensing E-Commerce Platform',
-    company: 'Deloitte',
-    stack: ['Next.js', 'TypeScript', 'SSR'],
-    description:
-      'Engineered a licensing e-commerce platform using Server-Side Rendering to improve user experience, page speed, and SEO performance.',
-    highlights: [
-      'Improved load times and search visibility by implementing SSR with Next.js and TypeScript.',
-      'Defined frontend architecture and documented engineering standards for long-term scalability.',
-      'Built a shared Storybook component library adopted across teams for reusable UI patterns.',
-    ],
-  },
-  {
-    title: 'Service Request Platform',
-    company: 'Infosys',
-    stack: ['React', 'TypeScript', 'GraphQL'],
-    description:
-      'Designed and developed a role-based approval workflow system that streamlined business request management.',
-    highlights: [
-      'Built role-based approval workflows and request management capabilities from the ground up.',
-      'Engineered .NET and GraphQL API integration patterns for seamless frontend-backend collaboration.',
-      'Mentored junior developers through code reviews and technical guidance.',
-    ],
-  },
-  {
-    title: 'Legacy Stock-Locate Platform Migration',
-    company: 'Infosys',
-    stack: ['React', 'TypeScript', 'Node.js'],
-    description:
-      'Modernized a 10-year-old legacy stock-locate platform by migrating it to React, improving maintainability and user experience.',
-    highlights: [
-      'Increased user engagement by 60%, shipped to production with fewer than 10 defects.',
-      'Architected a React/TypeScript Account Opening Portal that digitized advisor onboarding workflows.',
-      'Engineered Node.js REST APIs for dynamic, account-type-based form data retrieval.',
-    ],
-  },
 ]
 
 export const experience: ExperienceEntry[] = [

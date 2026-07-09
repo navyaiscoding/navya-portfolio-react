@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { profile, skills, projects, experience, roles, type SkillGroup, type Project } from './data'
+import { profile, skills, experience, roles, coreCompetencies, type SkillGroup } from './data'
 import { useReveal, useTheme, useTypewriter, type Theme } from './hooks'
 import CommandPalette from './CommandPalette'
-import ContactForm from './ContactForm'
-import GithubActivity from './GithubActivity'
+// import ContactForm from './ContactForm'
+import CodeBackground from './CodeBackground'
 
 interface NavLink {
   id: string
@@ -12,10 +12,9 @@ interface NavLink {
 
 const NAV_LINKS: NavLink[] = [
   { id: 'about', label: 'About' },
+  { id: 'competencies', label: 'Competencies' },
   { id: 'skills', label: 'Skills' },
-  { id: 'projects', label: 'Projects' },
   { id: 'experience', label: 'Experience' },
-  { id: 'github-activity', label: 'GitHub' },
   { id: 'contact', label: 'Contact' },
 ]
 
@@ -96,7 +95,7 @@ function Hero() {
         {profile.location} · {profile.availability}
       </p>
       <div className="hero-cta">
-        <a className="btn" href="#projects">View Projects</a>
+        <a className="btn" href="#experience">View Experience</a>
         <a className="btn btn-ghost" href={`mailto:${profile.email}`}>Get in Touch</a>
       </div>
     </section>
@@ -122,7 +121,40 @@ function About() {
     <section className="section" id="about" ref={ref}>
       <div className={className}>
         <SectionHeading title="About" />
-        <p className="about-text">{profile.summary}</p>
+        <div className="about-text">
+          {profile.bio.map((paragraph, i) => (
+            <p key={i}>{paragraph}</p>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function CompetencyCard({ label, index }: { label: string; index: number }) {
+  const { ref, className } = useReveal<HTMLDivElement>()
+  return (
+    <div
+      className={`competency-card ${className}`}
+      ref={ref}
+      style={{ transitionDelay: `${index * 50}ms` }}
+    >
+      <span>{label}</span>
+    </div>
+  )
+}
+
+function CoreCompetencies() {
+  const { ref, className } = useReveal()
+  return (
+    <section className="section" id="competencies" ref={ref}>
+      <div className={className}>
+        <SectionHeading title="Core Competencies" />
+        <div className="competencies-grid">
+          {coreCompetencies.map((label, i) => (
+            <CompetencyCard label={label} index={i} key={label} />
+          ))}
+        </div>
       </div>
     </section>
   )
@@ -173,65 +205,6 @@ function Skills() {
   )
 }
 
-interface ProjectCardProps {
-  p: Project
-  i: number
-}
-
-function ProjectCard({ p, i }: ProjectCardProps) {
-  const { ref, className } = useReveal()
-  const [expanded, setExpanded] = useState(false)
-  return (
-    <article
-      className={`project-card ${className} ${expanded ? 'expanded' : ''}`}
-      ref={ref}
-      style={{ transitionDelay: `${i * 80}ms` }}
-      onClick={() => setExpanded((e) => !e)}
-    >
-      <div className="project-index mono accent">{String(i + 1).padStart(2, '0')}</div>
-      <div className="project-body">
-        <p className="mono muted small">{p.company}</p>
-        <h3>{p.title}</h3>
-        <p className="project-desc">{p.description}</p>
-        <span className="project-toggle mono">
-          {expanded ? 'Hide details' : 'View details'}
-          <span className="chevron">▾</span>
-        </span>
-        <div className="project-details">
-          <div className="project-details-inner">
-            <ul className="project-highlights">
-              {p.highlights.map((h) => (
-                <li key={h}>{h}</li>
-              ))}
-            </ul>
-            <ul className="pill-list">
-              {p.stack.map((s) => (
-                <li key={s} className="pill pill-outline">{s}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </article>
-  )
-}
-
-function Projects() {
-  const { ref, className } = useReveal()
-  return (
-    <section className="section" id="projects" ref={ref}>
-      <div className={className}>
-        <SectionHeading title="Featured Projects" />
-        <div className="projects-list">
-          {projects.map((p, i) => (
-            <ProjectCard p={p} i={i} key={p.title} />
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
 function Experience() {
   const [active, setActive] = useState(0)
   const { ref, className } = useReveal()
@@ -268,18 +241,6 @@ function Experience() {
   )
 }
 
-function GithubActivitySection() {
-  const { ref, className } = useReveal()
-  return (
-    <section className="section" id="github-activity" ref={ref}>
-      <div className={className}>
-        <SectionHeading title="GitHub Activity" />
-        <GithubActivity />
-      </div>
-    </section>
-  )
-}
-
 function Contact() {
   const { ref, className } = useReveal()
   return (
@@ -291,7 +252,7 @@ function Contact() {
           Currently based in Stockholm with full EU work authorization and available immediately.
           Open to Senior Frontend / Full-Stack roles — reach out and let's talk.
         </p>
-        <ContactForm />
+        {/* <ContactForm /> */}
         <div className="contact-links mono">
           <a href={`mailto:${profile.email}`}>{profile.email}</a>
           <span>·</span>
@@ -315,18 +276,20 @@ function Footer() {
 export default function App() {
   const { theme, toggle } = useTheme()
   return (
-    <div className="app">
-      <Nav theme={theme} toggleTheme={toggle} />
-      <main>
-        <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <Experience />
-        <GithubActivitySection />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
+    <>
+      <CodeBackground />
+      <div className="app">
+        <Nav theme={theme} toggleTheme={toggle} />
+        <main>
+          <Hero />
+          <About />
+          <CoreCompetencies />
+          <Skills />
+          <Experience />
+          <Contact />
+        </main>
+        <Footer />
+      </div>
+    </>
   )
 }
