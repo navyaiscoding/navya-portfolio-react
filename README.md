@@ -7,7 +7,7 @@
 
 Personal developer portfolio for Navya Anumula, Senior Frontend Engineer specializing in React, Angular, TypeScript, and React Native. Built with React, TypeScript, and Vite.
 
-**Live site:** _add your deployed URL here once live (Netlify/Vercel/GitHub Pages)_
+**Live site:** (https://navya-anumula-portfolio.vercel.app/)
 
 ## Features
 
