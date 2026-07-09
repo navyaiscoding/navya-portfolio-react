@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { profile, skills, projects, experience, roles, coreCompetencies, type SkillGroup, type Project } from './data'
+import { profile, skills, experience, roles, coreCompetencies, type SkillGroup } from './data'
 import { useReveal, useTheme, useTypewriter, type Theme } from './hooks'
 import CommandPalette from './CommandPalette'
 import ContactForm from './ContactForm'
@@ -14,7 +14,6 @@ const NAV_LINKS: NavLink[] = [
   { id: 'about', label: 'About' },
   { id: 'competencies', label: 'Competencies' },
   { id: 'skills', label: 'Skills' },
-  { id: 'projects', label: 'Projects' },
   { id: 'experience', label: 'Experience' },
   { id: 'contact', label: 'Contact' },
 ]
@@ -96,7 +95,7 @@ function Hero() {
         {profile.location} · {profile.availability}
       </p>
       <div className="hero-cta">
-        <a className="btn" href="#projects">View Projects</a>
+        <a className="btn" href="#experience">View Experience</a>
         <a className="btn btn-ghost" href={`mailto:${profile.email}`}>Get in Touch</a>
       </div>
     </section>
@@ -203,65 +202,6 @@ function Skills() {
   )
 }
 
-interface ProjectCardProps {
-  p: Project
-  i: number
-}
-
-function ProjectCard({ p, i }: ProjectCardProps) {
-  const { ref, className } = useReveal()
-  const [expanded, setExpanded] = useState(false)
-  return (
-    <article
-      className={`project-card ${className} ${expanded ? 'expanded' : ''}`}
-      ref={ref}
-      style={{ transitionDelay: `${i * 80}ms` }}
-      onClick={() => setExpanded((e) => !e)}
-    >
-      <div className="project-index mono accent">{String(i + 1).padStart(2, '0')}</div>
-      <div className="project-body">
-        <p className="mono muted small">{p.company}</p>
-        <h3>{p.title}</h3>
-        <p className="project-desc">{p.description}</p>
-        <span className="project-toggle mono">
-          {expanded ? 'Hide details' : 'View details'}
-          <span className="chevron">▾</span>
-        </span>
-        <div className="project-details">
-          <div className="project-details-inner">
-            <ul className="project-highlights">
-              {p.highlights.map((h) => (
-                <li key={h}>{h}</li>
-              ))}
-            </ul>
-            <ul className="pill-list">
-              {p.stack.map((s) => (
-                <li key={s} className="pill pill-outline">{s}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </article>
-  )
-}
-
-function Projects() {
-  const { ref, className } = useReveal()
-  return (
-    <section className="section" id="projects" ref={ref}>
-      <div className={className}>
-        <SectionHeading title="Featured Projects" />
-        <div className="projects-list">
-          {projects.map((p, i) => (
-            <ProjectCard p={p} i={i} key={p.title} />
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
 function Experience() {
   const [active, setActive] = useState(0)
   const { ref, className } = useReveal()
@@ -342,7 +282,6 @@ export default function App() {
           <About />
           <CoreCompetencies />
           <Skills />
-          <Projects />
           <Experience />
           <Contact />
         </main>
