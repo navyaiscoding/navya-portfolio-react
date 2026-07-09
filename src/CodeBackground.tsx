@@ -1,8 +1,5 @@
 import { Fragment, type ReactNode } from 'react'
 
-// Real, representative snippets pulled from this project's own source
-// (hooks.ts, App.tsx, ContactForm.tsx, CommandPalette.tsx) — the background
-// is literally her own code, not generic filler.
 const SNIPPETS: string[] = [
   `export function useTheme(): ThemeResult {
   const [theme, setTheme] = useState<Theme>('light')

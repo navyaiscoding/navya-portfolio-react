@@ -135,7 +135,6 @@ function CompetencyCard({ label, index }: { label: string; index: number }) {
       ref={ref}
       style={{ transitionDelay: `${index * 50}ms` }}
     >
-      <span className="competency-mark accent">▹</span>
       <span>{label}</span>
     </div>
   )
@@ -249,7 +248,7 @@ function Contact() {
           Currently based in Stockholm with full EU work authorization and available immediately.
           Open to Senior Frontend / Full-Stack roles — reach out and let's talk.
         </p>
-        <ContactForm />
+        {/* <ContactForm /> */}
         <div className="contact-links mono">
           <a href={`mailto:${profile.email}`}>{profile.email}</a>
           <span>·</span>

@@ -65,7 +65,7 @@ src/
 ## Contact
 
 - Email: navyaanumula@gmail.com
-- LinkedIn: [linkedin.com/in/navya-anumula-frontend-engineer](https://linkedin.com/in/navya-anumula-frontend-engineer)
+- LinkedIn: [linkedin.com/in/navya-anumula-software-engineer](https://https://www.linkedin.com/in/navya-anumula-software-engineer/)
 
 ## License
 

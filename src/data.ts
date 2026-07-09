@@ -23,9 +23,6 @@ export interface NavSearchItem {
   keywords: string
 }
 
-// Formspree endpoint for the contact form. Sign up free at https://formspree.io,
-// create a form, and paste its endpoint URL here (looks like
-// 'https://formspree.io/f/xxxxxxxx'). Leave empty to fall back to a mailto link.
 export const contactFormEndpoint = ''
 
 export interface ExperienceEntry {
@@ -50,8 +47,8 @@ export const profile: Profile = {
   availability: 'Full EU Work Authorization · Available Immediately',
   email: 'navyaanumula@gmail.com',
   phone: '+46 72 774 4915',
-  linkedin: 'linkedin.com/in/navya-anumula-frontend-engineer',
-  linkedinUrl: 'https://linkedin.com/in/navya-anumula-frontend-engineer',
+  linkedin: 'https://www.linkedin.com/in/navya-anumula-software-engineer/',
+  linkedinUrl: 'https://www.linkedin.com/in/navya-anumula-software-engineer/',
   summary:
     'Senior Frontend Engineer with 7 years of experience building production web and mobile applications in React, Angular, TypeScript, and React Native across banking, financial services, healthcare, and e-commerce. Skilled in frontend architecture, performance and SEO optimization, and REST API integration, with a track record of defining frontend development standards, mentoring engineers, and leading Agile delivery from sprint planning through retrospectives.',
 }
@@ -68,9 +65,9 @@ export const skills: SkillGroup[] = [
     level: 88,
   },
   {
-    category: 'Backend & APIs',
-    items: ['Node.js', '.NET', 'GraphQL', 'REST APIs', 'SQL', 'PostgreSQL', 'JWT', 'OAuth'],
-    level: 78,
+    category: 'Testing & Quality',
+    items: ['Jest', 'Enzyme', 'React Testing Library', 'Postman', 'Accessibility (WCAG)', 'SEO', 'SonarQube'],
+    level: 90,
   },
   {
     category: 'DevOps & Tooling',
@@ -78,14 +75,14 @@ export const skills: SkillGroup[] = [
     level: 80,
   },
   {
-    category: 'Testing & Quality',
-    items: ['Jest', 'Enzyme', 'React Testing Library', 'Postman', 'Accessibility (WCAG)', 'SEO', 'SonarQube'],
-    level: 85,
+    category: 'Backend & APIs',
+    items: ['Node.js', 'GraphQL', 'REST APIs', 'SQL', 'PostgreSQL', 'JWT', 'OAuth'],
+    level: 70,
   },
   {
     category: 'AI-Assisted Development',
     items: ['GitHub Copilot', 'Cursor', 'Claude', 'LangGraph'],
-    level: 75,
+    level: 90,
   },
 ]
 
