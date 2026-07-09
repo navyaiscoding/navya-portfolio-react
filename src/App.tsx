@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { profile, skills, experience, roles, coreCompetencies, type SkillGroup } from './data'
 import { useReveal, useTheme, useTypewriter, type Theme } from './hooks'
 import CommandPalette from './CommandPalette'
-import ContactForm from './ContactForm'
+// import ContactForm from './ContactForm'
 import CodeBackground from './CodeBackground'
 
 interface NavLink {
@@ -121,7 +121,11 @@ function About() {
     <section className="section" id="about" ref={ref}>
       <div className={className}>
         <SectionHeading title="About" />
-        <p className="about-text">{profile.summary}</p>
+        <div className="about-text">
+          {profile.bio.map((paragraph, i) => (
+            <p key={i}>{paragraph}</p>
+          ))}
+        </div>
       </div>
     </section>
   )

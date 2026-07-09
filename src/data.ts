@@ -8,6 +8,7 @@ export interface Profile {
   linkedin: string
   linkedinUrl: string
   summary: string
+  bio: string[]
 }
 
 export interface SkillGroup {
@@ -51,6 +52,10 @@ export const profile: Profile = {
   linkedinUrl: 'https://www.linkedin.com/in/navya-anumula-software-engineer/',
   summary:
     'Senior Frontend Engineer with 7 years of experience building production web and mobile applications in React, Angular, TypeScript, and React Native across banking, financial services, healthcare, and e-commerce. Skilled in frontend architecture, performance and SEO optimization, and REST API integration, with a track record of defining frontend development standards, mentoring engineers, and leading Agile delivery from sprint planning through retrospectives.',
+  bio: [
+    "I'm a frontend engineer who likes making complex systems feel simple to use. Over the past 7 years I've built and scaled production applications across banking, healthcare, and e-commerce — mostly in React, Angular, and TypeScript, with a stint in React Native for mobile banking. I care as much about how a codebase feels to work in as how the product feels to use, which is why I spend a lot of time on architecture, performance, and the small decisions that help a team move faster.",
+    "Lately I've been leaning into AI-assisted development, pairing tools like Copilot and Cursor with solid engineering fundamentals rather than treating them as a shortcut. I'm based in Stockholm with full EU work authorization, and open to senior frontend and full-stack roles.",
+  ],
 }
 
 export const skills: SkillGroup[] = [
