@@ -47,7 +47,65 @@ body {
 .muted { color: var(--muted); }
 .small { font-size: 0.85rem; }
 
-.app { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+.app { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+
+/* ANIMATED CODE BACKGROUND */
+.code-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  gap: 24px;
+  padding: 0 12px;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0.5;
+  mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
+}
+[data-theme='dark'] .code-bg { opacity: 0.4; }
+
+.code-bg-column {
+  flex: 1;
+  min-width: 240px;
+  overflow: hidden;
+}
+.code-bg-track {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  animation-name: scrollCode;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.code-bg-track.reverse { animation-direction: reverse; }
+@keyframes scrollCode {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
+}
+
+.code-bg-block {
+  font-size: 0.72rem;
+  line-height: 1.6;
+  color: var(--muted);
+  white-space: pre;
+  opacity: 0.55;
+}
+.code-bg-block .tok-kw { color: var(--accent); opacity: 0.9; }
+.code-bg-block .tok-str { color: var(--muted); opacity: 0.7; }
+.code-bg-block .tok-type { color: var(--text); opacity: 0.7; }
+.code-bg-block .tok-punct { color: var(--muted); opacity: 0.5; }
+
+@media (max-width: 900px) {
+  .code-bg-column:nth-child(3),
+  .code-bg-column:nth-child(4) { display: none; }
+}
+@media (max-width: 560px) {
+  .code-bg { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .code-bg-track { animation-play-state: paused; }
+}
 
 a { color: inherit; text-decoration: none; }
 
