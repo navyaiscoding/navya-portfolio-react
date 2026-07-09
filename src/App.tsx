@@ -11,12 +11,12 @@ interface NavLink {
 }
 
 const NAV_LINKS: NavLink[] = [
-  { id: 'about', label: '01. About' },
-  { id: 'skills', label: '02. Skills' },
-  { id: 'projects', label: '03. Projects' },
-  { id: 'experience', label: '04. Experience' },
-  { id: 'github-activity', label: '05. GitHub' },
-  { id: 'contact', label: '06. Contact' },
+  { id: 'about', label: 'About' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'github-activity', label: 'GitHub' },
+  { id: 'contact', label: 'Contact' },
 ]
 
 interface ThemeToggleProps {
@@ -104,14 +104,13 @@ function Hero() {
 }
 
 interface SectionHeadingProps {
-  number: string
   title: string
 }
 
-function SectionHeading({ number, title }: SectionHeadingProps) {
+function SectionHeading({ title }: SectionHeadingProps) {
   return (
     <h2 className="section-heading">
-      <span className="accent mono">{number}.</span> {title}
+      {title}
       <span className="rule" />
     </h2>
   )
@@ -122,7 +121,7 @@ function About() {
   return (
     <section className="section" id="about" ref={ref}>
       <div className={className}>
-        <SectionHeading number="01" title="About" />
+        <SectionHeading title="About" />
         <p className="about-text">{profile.summary}</p>
       </div>
     </section>
@@ -163,7 +162,7 @@ function Skills() {
   return (
     <section className="section" id="skills" ref={ref}>
       <div className={className}>
-        <SectionHeading number="02" title="Skills" />
+        <SectionHeading title="Skills" />
         <div className="skills-grid">
           {skills.map((group, i) => (
             <SkillCard group={group} index={i} key={group.category} />
@@ -222,7 +221,7 @@ function Projects() {
   return (
     <section className="section" id="projects" ref={ref}>
       <div className={className}>
-        <SectionHeading number="03" title="Featured Projects" />
+        <SectionHeading title="Featured Projects" />
         <div className="projects-list">
           {projects.map((p, i) => (
             <ProjectCard p={p} i={i} key={p.title} />
@@ -239,7 +238,7 @@ function Experience() {
   return (
     <section className="section" id="experience" ref={ref}>
       <div className={className}>
-        <SectionHeading number="04" title="Experience" />
+        <SectionHeading title="Experience" />
         <div className="exp-layout">
           <div className="exp-tabs">
             {experience.map((e, i) => (
@@ -274,7 +273,7 @@ function GithubActivitySection() {
   return (
     <section className="section" id="github-activity" ref={ref}>
       <div className={className}>
-        <SectionHeading number="05" title="GitHub Activity" />
+        <SectionHeading title="GitHub Activity" />
         <GithubActivity />
       </div>
     </section>
@@ -286,7 +285,7 @@ function Contact() {
   return (
     <section className="section contact" id="contact" ref={ref}>
       <div className={className}>
-        <p className="mono accent">06. What's Next?</p>
+        <p className="mono accent">What's Next?</p>
         <h2>Get In Touch</h2>
         <p className="about-text center">
           Currently based in Stockholm with full EU work authorization and available immediately.
