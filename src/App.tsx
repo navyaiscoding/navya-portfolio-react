@@ -1,6 +1,9 @@
 import { useState } from 'react'
-import { profile, skills, experience, roles, type SkillGroup } from './data'
+import { profile, skills, projects, experience, roles, type SkillGroup, type Project } from './data'
 import { useReveal, useTheme, useTypewriter, type Theme } from './hooks'
+import CommandPalette from './CommandPalette'
+import ContactForm from './ContactForm'
+import GithubActivity from './GithubActivity'
 
 interface NavLink {
   id: string
@@ -8,10 +11,12 @@ interface NavLink {
 }
 
 const NAV_LINKS: NavLink[] = [
-  { id: 'about', label: 'About' },
-  { id: 'skills', label: 'Skills' },
-  { id: 'experience', label: 'Experience' },
-  { id: 'contact', label: 'Contact' },
+  { id: 'about', label: '01. About' },
+  { id: 'skills', label: '02. Skills' },
+  { id: 'projects', label: '03. Projects' },
+  { id: 'experience', label: '04. Experience' },
+  { id: 'github-activity', label: '05. GitHub' },
+  { id: 'contact', label: '06. Contact' },
 ]
 
 interface ThemeToggleProps {
@@ -65,6 +70,7 @@ function Nav({ theme, toggleTheme }: NavProps) {
               <button key={l.id} onClick={() => scrollTo(l.id)}>{l.label}</button>
             ))}
           </nav>
+          <CommandPalette />
           <ThemeToggle theme={theme} toggle={toggleTheme} />
           <button className="nav-toggle" onClick={() => setOpen(!open)} aria-label="Toggle menu">
             {open ? '✕' : '☰'}
@@ -90,6 +96,7 @@ function Hero() {
         {profile.location} · {profile.availability}
       </p>
       <div className="hero-cta">
+        <a className="btn" href="#projects">View Projects</a>
         <a className="btn btn-ghost" href={`mailto:${profile.email}`}>Get in Touch</a>
       </div>
     </section>
@@ -97,13 +104,14 @@ function Hero() {
 }
 
 interface SectionHeadingProps {
+  number: string
   title: string
 }
 
-function SectionHeading({ title }: SectionHeadingProps) {
+function SectionHeading({ number, title }: SectionHeadingProps) {
   return (
     <h2 className="section-heading">
-      {title}
+      <span className="accent mono">{number}.</span> {title}
       <span className="rule" />
     </h2>
   )
@@ -114,7 +122,7 @@ function About() {
   return (
     <section className="section" id="about" ref={ref}>
       <div className={className}>
-        <SectionHeading title="About" />
+        <SectionHeading number="01" title="About" />
         <p className="about-text">{profile.summary}</p>
       </div>
     </section>
@@ -132,9 +140,15 @@ function SkillCard({ group, index }: SkillCardProps) {
     <div
       className={`skill-card ${className}`}
       ref={ref}
-      style={{ transitionDelay: `${index * 60}ms` }}
+      style={{ transitionDelay: `${index * 60}ms`, ['--level' as string]: `${group.level}%` }}
     >
       <h3 className="mono">{group.category}</h3>
+      <div className="skill-level">
+        <div className="skill-level-track">
+          <div className="skill-level-fill" />
+        </div>
+        <span className="skill-level-value mono">{group.level}%</span>
+      </div>
       <ul className="pill-list">
         {group.items.map((item) => (
           <li key={item} className="pill">{item}</li>
@@ -149,10 +163,69 @@ function Skills() {
   return (
     <section className="section" id="skills" ref={ref}>
       <div className={className}>
-        <SectionHeading title="Skills" />
+        <SectionHeading number="02" title="Skills" />
         <div className="skills-grid">
           {skills.map((group, i) => (
             <SkillCard group={group} index={i} key={group.category} />
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+interface ProjectCardProps {
+  p: Project
+  i: number
+}
+
+function ProjectCard({ p, i }: ProjectCardProps) {
+  const { ref, className } = useReveal()
+  const [expanded, setExpanded] = useState(false)
+  return (
+    <article
+      className={`project-card ${className} ${expanded ? 'expanded' : ''}`}
+      ref={ref}
+      style={{ transitionDelay: `${i * 80}ms` }}
+      onClick={() => setExpanded((e) => !e)}
+    >
+      <div className="project-index mono accent">{String(i + 1).padStart(2, '0')}</div>
+      <div className="project-body">
+        <p className="mono muted small">{p.company}</p>
+        <h3>{p.title}</h3>
+        <p className="project-desc">{p.description}</p>
+        <span className="project-toggle mono">
+          {expanded ? 'Hide details' : 'View details'}
+          <span className="chevron">▾</span>
+        </span>
+        <div className="project-details">
+          <div className="project-details-inner">
+            <ul className="project-highlights">
+              {p.highlights.map((h) => (
+                <li key={h}>{h}</li>
+              ))}
+            </ul>
+            <ul className="pill-list">
+              {p.stack.map((s) => (
+                <li key={s} className="pill pill-outline">{s}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </article>
+  )
+}
+
+function Projects() {
+  const { ref, className } = useReveal()
+  return (
+    <section className="section" id="projects" ref={ref}>
+      <div className={className}>
+        <SectionHeading number="03" title="Featured Projects" />
+        <div className="projects-list">
+          {projects.map((p, i) => (
+            <ProjectCard p={p} i={i} key={p.title} />
           ))}
         </div>
       </div>
@@ -166,7 +239,7 @@ function Experience() {
   return (
     <section className="section" id="experience" ref={ref}>
       <div className={className}>
-        <SectionHeading title="Experience" />
+        <SectionHeading number="04" title="Experience" />
         <div className="exp-layout">
           <div className="exp-tabs">
             {experience.map((e, i) => (
@@ -196,18 +269,30 @@ function Experience() {
   )
 }
 
+function GithubActivitySection() {
+  const { ref, className } = useReveal()
+  return (
+    <section className="section" id="github-activity" ref={ref}>
+      <div className={className}>
+        <SectionHeading number="05" title="GitHub Activity" />
+        <GithubActivity />
+      </div>
+    </section>
+  )
+}
+
 function Contact() {
   const { ref, className } = useReveal()
   return (
     <section className="section contact" id="contact" ref={ref}>
       <div className={className}>
-        <p className="mono accent">What's Next?</p>
+        <p className="mono accent">06. What's Next?</p>
         <h2>Get In Touch</h2>
         <p className="about-text center">
           Currently based in Stockholm with full EU work authorization and available immediately.
           Open to Senior Frontend / Full-Stack roles — reach out and let's talk.
         </p>
-        <a className="btn" href={`mailto:${profile.email}`}>Say Hello</a>
+        <ContactForm />
         <div className="contact-links mono">
           <a href={`mailto:${profile.email}`}>{profile.email}</a>
           <span>·</span>
@@ -237,7 +322,9 @@ export default function App() {
         <Hero />
         <About />
         <Skills />
+        <Projects />
         <Experience />
+        <GithubActivitySection />
         <Contact />
       </main>
       <Footer />
