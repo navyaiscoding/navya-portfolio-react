@@ -49,8 +49,6 @@ export const roles: string[] = [
   'Angular Developer',
   'TypeScript Engineer',
   'Frontend Architect',
-  'Web Developer',
-  'Mobile Developer',
 ]
 
 export const profile: Profile = {
@@ -99,12 +97,76 @@ export const skills: SkillGroup[] = [
   },
 ]
 
+export const coreCompetencies: string[] = [
+  'Frontend Architecture & Design Systems',
+  'Performance & SEO Optimization',
+  'API Design & CMS Integration',
+  'Accessibility (WCAG) & UX Quality',
+  'Figma & Designer Collaboration',
+  'Technical Leadership & Mentoring',
+  'Stakeholder Engagement & Release Management',
+  'GenAI-Assisted Development',
+]
+
 export const navSearchItems: NavSearchItem[] = [
   { id: 'top', label: 'Home', group: 'Sections', keywords: 'home top hero start' },
   { id: 'about', label: 'About', group: 'Sections', keywords: 'about summary bio' },
+  { id: 'competencies', label: 'Core Competencies', group: 'Sections', keywords: 'competencies strengths capabilities' },
   { id: 'skills', label: 'Skills', group: 'Sections', keywords: 'skills tech stack' },
+  { id: 'projects', label: 'Featured Projects', group: 'Sections', keywords: 'projects work case studies' },
   { id: 'experience', label: 'Experience', group: 'Sections', keywords: 'experience work history jobs' },
   { id: 'contact', label: 'Contact', group: 'Sections', keywords: 'contact email message reach out' },
+]
+
+export const projects: Project[] = [
+  {
+    title: 'Healthcare Digital Platform',
+    company: 'Deloitte',
+    stack: ['Angular', 'TypeScript', 'Spartacus'],
+    description:
+      'Delivered two consecutive Angular releases for a US-based healthcare digital platform, building intuitive, production-ready customer workflows.',
+    highlights: [
+      'Implemented a Bulk Order feature enabling users to add up to 10,000 items to cart via Excel upload.',
+      'Led end-to-end delivery of invoice management: search, sorting, download, printing, export, and chargeback details.',
+      'Maintained 88% test coverage using React Testing Library assisted by GitHub Copilot, improving release confidence.',
+    ],
+  },
+  {
+    title: 'Licensing E-Commerce Platform',
+    company: 'Deloitte',
+    stack: ['Next.js', 'TypeScript', 'SSR'],
+    description:
+      'Engineered a licensing e-commerce platform using Server-Side Rendering to improve user experience, page speed, and SEO performance.',
+    highlights: [
+      'Improved load times and search visibility by implementing SSR with Next.js and TypeScript.',
+      'Defined frontend architecture and documented engineering standards for long-term scalability.',
+      'Built a shared Storybook component library adopted across teams for reusable UI patterns.',
+    ],
+  },
+  {
+    title: 'Service Request Platform',
+    company: 'Infosys',
+    stack: ['React', 'TypeScript', 'GraphQL'],
+    description:
+      'Designed and developed a role-based approval workflow system that streamlined business request management.',
+    highlights: [
+      'Built role-based approval workflows and request management capabilities from the ground up.',
+      'Engineered .NET and GraphQL API integration patterns for seamless frontend-backend collaboration.',
+      'Mentored junior developers through code reviews and technical guidance.',
+    ],
+  },
+  {
+    title: 'Legacy Stock-Locate Platform Migration',
+    company: 'Infosys',
+    stack: ['React', 'TypeScript', 'Node.js'],
+    description:
+      'Modernized a 10-year-old legacy stock-locate platform by migrating it to React, improving maintainability and user experience.',
+    highlights: [
+      'Increased user engagement by 60%, shipped to production with fewer than 10 defects.',
+      'Architected a React/TypeScript Account Opening Portal that digitized advisor onboarding workflows.',
+      'Engineered Node.js REST APIs for dynamic, account-type-based form data retrieval.',
+    ],
+  },
 ]
 
 export const experience: ExperienceEntry[] = [
