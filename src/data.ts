@@ -23,10 +23,6 @@ export interface NavSearchItem {
   keywords: string
 }
 
-export const github = {
-  username: 'navyaiscoding',
-}
-
 // Formspree endpoint for the contact form. Sign up free at https://formspree.io,
 // create a form, and paste its endpoint URL here (looks like
 // 'https://formspree.io/f/xxxxxxxx'). Leave empty to fall back to a mailto link.
@@ -107,7 +103,6 @@ export const navSearchItems: NavSearchItem[] = [
   { id: 'skills', label: 'Skills', group: 'Sections', keywords: 'skills tech stack' },
   { id: 'projects', label: 'Featured Projects', group: 'Sections', keywords: 'projects work case studies' },
   { id: 'experience', label: 'Experience', group: 'Sections', keywords: 'experience work history jobs' },
-  { id: 'github-activity', label: 'GitHub Activity', group: 'Sections', keywords: 'github repos code activity' },
   { id: 'contact', label: 'Contact', group: 'Sections', keywords: 'contact email message reach out' },
 ]
 

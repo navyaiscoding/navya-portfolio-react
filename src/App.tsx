@@ -3,7 +3,6 @@ import { profile, skills, projects, experience, roles, type SkillGroup, type Pro
 import { useReveal, useTheme, useTypewriter, type Theme } from './hooks'
 import CommandPalette from './CommandPalette'
 import ContactForm from './ContactForm'
-import GithubActivity from './GithubActivity'
 
 interface NavLink {
   id: string
@@ -15,7 +14,6 @@ const NAV_LINKS: NavLink[] = [
   { id: 'skills', label: 'Skills' },
   { id: 'projects', label: 'Projects' },
   { id: 'experience', label: 'Experience' },
-  { id: 'github-activity', label: 'GitHub' },
   { id: 'contact', label: 'Contact' },
 ]
 
@@ -268,18 +266,6 @@ function Experience() {
   )
 }
 
-function GithubActivitySection() {
-  const { ref, className } = useReveal()
-  return (
-    <section className="section" id="github-activity" ref={ref}>
-      <div className={className}>
-        <SectionHeading title="GitHub Activity" />
-        <GithubActivity />
-      </div>
-    </section>
-  )
-}
-
 function Contact() {
   const { ref, className } = useReveal()
   return (
@@ -323,7 +309,6 @@ export default function App() {
         <Skills />
         <Projects />
         <Experience />
-        <GithubActivitySection />
         <Contact />
       </main>
       <Footer />
