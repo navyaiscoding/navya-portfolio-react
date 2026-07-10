@@ -39,6 +39,8 @@ export const roles: string[] = [
   'Angular Developer',
   'TypeScript Engineer',
   'Frontend Architect',
+  'Web Developer',
+  'Mobile Developer',
 ]
 
 export const profile: Profile = {
