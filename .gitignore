@@ -6,3 +6,6 @@ dist-ssr
 *.tsbuildinfo
 .vscode/*
 !.vscode/extensions.json
+.env
+.env.*
+!.env.example
