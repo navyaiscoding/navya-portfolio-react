@@ -1,7 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import Anthropic from '@anthropic-ai/sdk'
 import { StateGraph, Annotation, START, END } from '@langchain/langgraph'
-import { profile, skills, coreCompetencies, experience } from '../src/data'
+import { profile, skills, coreCompetencies, experience } from '../src/data.js'
 
 /**
  * Live agentic workflow, not a single prompt.
