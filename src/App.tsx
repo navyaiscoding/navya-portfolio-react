@@ -4,7 +4,7 @@ import { useReveal, useTheme, useTypewriter, type Theme } from './hooks'
 import CommandPalette from './CommandPalette'
 // import ContactForm from './ContactForm'
 import CodeBackground from './CodeBackground'
-import AIResumeTailor from './AIResumeTailor'
+import ResumeFitScore from './ResumeFitScore'
 
 interface NavLink {
   id: string
@@ -15,7 +15,7 @@ const NAV_LINKS: NavLink[] = [
   { id: 'about', label: 'About' },
   { id: 'competencies', label: 'Competencies' },
   { id: 'skills', label: 'Skills' },
-  { id: 'ai-tailor', label: 'AI Tailor' },
+  { id: 'fit-score', label: 'Fit Score' },
   { id: 'experience', label: 'Experience' },
   { id: 'contact', label: 'Contact' },
 ]
@@ -207,13 +207,13 @@ function Skills() {
   )
 }
 
-function AITailorSection() {
+function FitScoreSection() {
   const { ref, className } = useReveal()
   return (
-    <section className="section" id="ai-tailor" ref={ref}>
+    <section className="section" id="fit-score" ref={ref}>
       <div className={className}>
-        <SectionHeading title="AI Resume Tailor" />
-        <AIResumeTailor />
+        <SectionHeading title="Resume Fit Score" />
+        <ResumeFitScore />
       </div>
     </section>
   )
@@ -299,7 +299,7 @@ export default function App() {
           <About />
           <CoreCompetencies />
           <Skills />
-          <AITailorSection />
+          <FitScoreSection />
           <Experience />
           <Contact />
         </main>

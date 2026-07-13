@@ -4,18 +4,18 @@ import { StateGraph, Annotation, START, END } from '@langchain/langgraph'
 import { profile, skills, coreCompetencies, experience } from '../src/data.js'
 
 /**
- * Live agentic workflow, not a single prompt.
+ * Live agentic workflow, not a single prompt — a leaner sibling of the
+ * original resume-tailoring agent. Two nodes instead of four, and no large
+ * generated text (just a score + short rationale + keyword lists), so it's
+ * meaningfully cheaper to run per request while keeping the real part: a
+ * conditional loop where the agent checks its own output against the
+ * resume before it's allowed to return.
  *
  * Graph:
- *   extractRequirements -> matchResume -> draftBullets -> critiqueBullets
- *                                              ^________________|
- *                                    (loops back if critique finds a
- *                                     fabricated skill, up to 2 times)
- *
- * The resume "source of truth" is src/data.ts — the same file that drives
- * the rest of the site — so the agent can never drift out of sync with the
- * public resume content, and every claim it's allowed to make about the
- * candidate is auditable against real, versioned data.
+ *   scoreFit -> critiqueScore
+ *      ^_____________|
+ *   (loops back if the critique catches a fabricated strength or a score
+ *    that doesn't match its own rationale, up to 2 times)
  */
 
 // ---------------------------------------------------------------------------
@@ -49,18 +49,17 @@ function buildResumeContext(): string {
 // ---------------------------------------------------------------------------
 // Agent state
 // ---------------------------------------------------------------------------
-const TailorState = Annotation.Root({
+const FitState = Annotation.Root({
   jobDescription: Annotation<string>(),
   resumeContext: Annotation<string>(),
-  requirements: Annotation<string[]>({ reducer: (_prev, next) => next, default: () => [] }),
-  matched: Annotation<string[]>({ reducer: (_prev, next) => next, default: () => [] }),
-  missingKeywords: Annotation<string[]>({ reducer: (_prev, next) => next, default: () => [] }),
   fitScore: Annotation<number>({ reducer: (_prev, next) => next, default: () => 0 }),
-  bullets: Annotation<string[]>({ reducer: (_prev, next) => next, default: () => [] }),
-  critiqueIssues: Annotation<string[]>({ reducer: (_prev, next) => next, default: () => [] }),
+  rationale: Annotation<string>({ reducer: (_prev, next) => next, default: () => '' }),
+  strengths: Annotation<string[]>({ reducer: (_prev, next) => next, default: () => [] }),
+  gaps: Annotation<string[]>({ reducer: (_prev, next) => next, default: () => [] }),
+  critiqueNotes: Annotation<string[]>({ reducer: (_prev, next) => next, default: () => [] }),
   revisionCount: Annotation<number>({ reducer: (_prev, next) => next, default: () => 0 }),
 })
-type TailorStateType = typeof TailorState.State
+type FitStateType = typeof FitState.State
 
 // ---------------------------------------------------------------------------
 // Claude client + JSON-mode helper
@@ -74,7 +73,7 @@ function getClient(): Anthropic {
 async function callClaudeJSON(system: string, user: string): Promise<any> {
   const res = await getClient().messages.create({
     model: 'claude-haiku-4-5-20251001',
-    max_tokens: 1024,
+    max_tokens: 512,
     system,
     messages: [{ role: 'user', content: user }],
   })
@@ -88,90 +87,61 @@ async function callClaudeJSON(system: string, user: string): Promise<any> {
 // ---------------------------------------------------------------------------
 // Nodes
 // ---------------------------------------------------------------------------
-async function extractRequirementsNode(state: TailorStateType) {
-  const data = await callClaudeJSON(
-    'You are a technical recruiter. Extract the key technical skills, tools, and qualifications explicitly ' +
-      'required or preferred in the job description the user provides. Return strict JSON only: ' +
-      '{"requirements": string[]}. Keep each requirement short (1-4 words). No prose outside the JSON.',
-    state.jobDescription,
-  )
-  return { requirements: Array.isArray(data.requirements) ? data.requirements.slice(0, 20) : [] }
-}
-
-async function matchResumeNode(state: TailorStateType) {
-  const data = await callClaudeJSON(
-    'You are a technical recruiter. Given a candidate resume and a list of job requirements, decide which ' +
-      'requirements are genuinely supported by the resume and which are missing. Only mark a requirement as ' +
-      "matched if it is explicitly and clearly supported by the resume text — never infer a skill that isn't " +
-      'stated. Return strict JSON only: {"matched": string[], "missing": string[], "fitScore": number} where ' +
-      'fitScore is 0-100.\n\nRESUME:\n' +
-      state.resumeContext,
-    `Requirements to check: ${JSON.stringify(state.requirements)}`,
-  )
-  return {
-    matched: Array.isArray(data.matched) ? data.matched : [],
-    missingKeywords: Array.isArray(data.missing) ? data.missing : [],
-    fitScore: typeof data.fitScore === 'number' ? Math.round(data.fitScore) : 0,
-  }
-}
-
-async function draftBulletsNode(state: TailorStateType) {
-  const feedback = state.critiqueIssues.length
-    ? `\n\nThe previous draft incorrectly referenced these skills, which are NOT in the resume: ` +
-      `${state.critiqueIssues.join(', ')}. Remove or rephrase them. Do not mention any tool or technology that ` +
-      "isn't in the resume text below."
+async function scoreFitNode(state: FitStateType) {
+  const feedback = state.critiqueNotes.length
+    ? `\n\nYour previous attempt had these problems: ${state.critiqueNotes.join('; ')}. Fix them this time.`
     : ''
 
   const data = await callClaudeJSON(
-    'You are a senior technical resume writer. Write up to 5 resume bullets in Google XYZ format ' +
-      '("Accomplished X, as measured by Y, by doing Z") tailored to the job requirements below. ' +
-      'CRITICAL RULE: you may ONLY reference skills, tools, and technologies that literally appear in the ' +
-      "candidate's resume context. Never invent or infer a technology the candidate hasn't listed, even if the " +
-      'job description asks for it — reframe and emphasize real experience, do not fabricate.' +
+    'You are an experienced, honest technical recruiter — critical, not a cheerleader. Score how well the ' +
+      "candidate resume fits the job description, 0-100. Only count a strength if it's explicitly and clearly " +
+      "supported by the resume text — never infer a skill that isn't stated. List real gaps too, don't soften " +
+      'them. Your rationale must be consistent with the score (a score above 80 needs very few real gaps; a ' +
+      'score below 50 should reflect a clear mismatch).' +
       feedback +
       '\n\nRESUME:\n' +
       state.resumeContext,
-    `Job requirements: ${JSON.stringify(state.requirements)}\n` +
-      `Matched skills to emphasize: ${JSON.stringify(state.matched)}\n\n` +
-      'Return strict JSON only: {"bullets": string[]}',
+    `JOB DESCRIPTION:\n${state.jobDescription}\n\n` +
+      'Return strict JSON only: {"fitScore": number, "rationale": string (2-3 sentences), ' +
+      '"strengths": string[] (max 6, real matches only), "gaps": string[] (max 6, real gaps only)}',
   )
   return {
-    bullets: Array.isArray(data.bullets) ? data.bullets.slice(0, 5) : [],
+    fitScore: typeof data.fitScore === 'number' ? Math.round(data.fitScore) : 0,
+    rationale: typeof data.rationale === 'string' ? data.rationale : '',
+    strengths: Array.isArray(data.strengths) ? data.strengths.slice(0, 6) : [],
+    gaps: Array.isArray(data.gaps) ? data.gaps.slice(0, 6) : [],
     revisionCount: state.revisionCount + 1,
   }
 }
 
-async function critiqueBulletsNode(state: TailorStateType) {
+async function critiqueScoreNode(state: FitStateType) {
   const data = await callClaudeJSON(
-    'You are a strict fact-checker. Compare the drafted resume bullets against the candidate resume context. ' +
-      'Flag any tool, technology, or skill named in the bullets that does NOT appear anywhere in the resume ' +
-      'context — these are fabrications and must be caught. Return strict JSON only: {"issues": string[]} ' +
-      '(empty array if none found).\n\nRESUME:\n' +
+    'You are a strict fact-checker. Given a resume and a drafted fit assessment (score, rationale, strengths, ' +
+      'gaps), flag any problem: a "strength" that references a skill NOT present anywhere in the resume, or a ' +
+      'score that contradicts its own rationale (e.g. a high score despite the rationale describing major gaps). ' +
+      'Return strict JSON only: {"problems": string[]} (empty array if none found).\n\nRESUME:\n' +
       state.resumeContext,
-    `Drafted bullets:\n${state.bullets.join('\n')}`,
+    `Fit score: ${state.fitScore}\nRationale: ${state.rationale}\n` +
+      `Strengths: ${JSON.stringify(state.strengths)}\nGaps: ${JSON.stringify(state.gaps)}`,
   )
-  return { critiqueIssues: Array.isArray(data.issues) ? data.issues : [] }
+  return { critiqueNotes: Array.isArray(data.problems) ? data.problems : [] }
 }
 
-function routeAfterCritique(state: TailorStateType): 'revise' | 'done' {
-  if (state.critiqueIssues.length > 0 && state.revisionCount < 2) return 'revise'
+function routeAfterCritique(state: FitStateType): 'revise' | 'done' {
+  if (state.critiqueNotes.length > 0 && state.revisionCount < 2) return 'revise'
   return 'done'
 }
 
 // ---------------------------------------------------------------------------
 // Graph
 // ---------------------------------------------------------------------------
-const graph = new StateGraph(TailorState)
-  .addNode('extractRequirements', extractRequirementsNode)
-  .addNode('matchResume', matchResumeNode)
-  .addNode('draftBullets', draftBulletsNode)
-  .addNode('critiqueBullets', critiqueBulletsNode)
-  .addEdge(START, 'extractRequirements')
-  .addEdge('extractRequirements', 'matchResume')
-  .addEdge('matchResume', 'draftBullets')
-  .addEdge('draftBullets', 'critiqueBullets')
-  .addConditionalEdges('critiqueBullets', routeAfterCritique, {
-    revise: 'draftBullets',
+const graph = new StateGraph(FitState)
+  .addNode('scoreFit', scoreFitNode)
+  .addNode('critiqueScore', critiqueScoreNode)
+  .addEdge(START, 'scoreFit')
+  .addEdge('scoreFit', 'critiqueScore')
+  .addConditionalEdges('critiqueScore', routeAfterCritique, {
+    revise: 'scoreFit',
     done: END,
   })
   .compile()
@@ -181,7 +151,7 @@ const graph = new StateGraph(TailorState)
 // dashboard-level Vercel Firewall rule that backs this up for real)
 // ---------------------------------------------------------------------------
 const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000
-const RATE_LIMIT_MAX = 5
+const RATE_LIMIT_MAX = 8
 const hits = new Map<string, { count: number; resetAt: number }>()
 
 function checkRateLimit(ip: string): boolean {
@@ -238,13 +208,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     })
     res.status(200).json({
       fitScore: result.fitScore,
-      matched: result.matched,
-      missingKeywords: result.missingKeywords,
-      bullets: result.bullets,
+      rationale: result.rationale,
+      strengths: result.strengths,
+      gaps: result.gaps,
       revisions: result.revisionCount,
     })
   } catch (err) {
-    console.error('tailor agent error', err)
+    console.error('fit-score agent error', err)
     res.status(500).json({ error: 'The agent failed to complete. Please try again.' })
   }
 }
