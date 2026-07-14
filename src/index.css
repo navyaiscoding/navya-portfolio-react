@@ -6,8 +6,8 @@
   --text: #475569;
   --text-bright: #0f172a;
   --muted: #64748b;
-  --accent: #0d9488;
-  --accent-dim: rgba(13, 148, 136, 0.08);
+  --accent: #663399;
+  --accent-dim: rgba(132, 95, 160, 0.318);
   --mono: 'JetBrains Mono', 'Fira Code', monospace;
   --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --shadow: 0 0.0625rem 0.125rem rgba(15, 23, 42, 0.04);
@@ -23,8 +23,8 @@
   --text: #cbd5e1;
   --text-bright: #e6edf5;
   --muted: #94a3b8;
-  --accent: #5ef1c4;
-  --accent-dim: rgba(94, 241, 196, 0.12);
+  --accent: #cea2fd;
+  --accent-dim: rgba(132, 95, 160, 0.318);
   --shadow: 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 1rem 2rem rgba(0, 0, 0, 0.45);
   color-scheme: dark;
