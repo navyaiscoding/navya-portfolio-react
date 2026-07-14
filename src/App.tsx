@@ -5,6 +5,7 @@ import Experience from './components/Experience/Experience'
 import Footer from './components/Footer/Footer'
 import Hero from './components/Hero/Hero'
 import Nav from './components/Nav/Nav'
+import SectionDock from './components/SectionDock/SectionDock'
 import Skills from './components/Skills/Skills'
 import CodeBackground from './components/CodeBackground/CodeBackground'
 import { useTheme } from './hooks'
@@ -26,6 +27,7 @@ export default function App() {
         </main>
         <Footer />
       </div>
+      <SectionDock />
     </>
   )
 }

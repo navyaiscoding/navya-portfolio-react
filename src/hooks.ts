@@ -31,6 +31,39 @@ export function useReveal<T extends HTMLElement = HTMLElement>(): RevealResult<T
   return { ref, className: `reveal ${visible ? 'visible' : ''}` }
 }
 
+// Tracks which of the given section ids is currently centered in the
+// viewport, for scroll-spy style navigation highlighting.
+export function useActiveSection(ids: string[]): string {
+  const idsKey = ids.join(',')
+  const [active, setActive] = useState(ids[0] ?? '')
+
+  useEffect(() => {
+    const sectionIds = idsKey ? idsKey.split(',') : []
+    const elements = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null)
+
+    if (elements.length === 0) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.filter((entry) => entry.isIntersecting)
+        if (visible.length === 0) return
+        const topmost = visible.reduce((a, b) =>
+          a.boundingClientRect.top < b.boundingClientRect.top ? a : b
+        )
+        setActive(topmost.target.id)
+      },
+      { rootMargin: '-45% 0px -45% 0px', threshold: 0 }
+    )
+
+    elements.forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
+  }, [idsKey])
+
+  return active
+}
+
 interface ThemeResult {
   theme: Theme
   toggle: () => void

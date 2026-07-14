@@ -1,0 +1,47 @@
+.dock {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 60;
+  display: flex;
+  gap: 0.3rem;
+  padding: 0.4rem;
+  background: color-mix(in srgb, var(--card) 92%, transparent);
+  backdrop-filter: blur(0.5rem);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-lg);
+}
+
+.dock-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  width: 3.6rem;
+  padding: 0.5rem 0.3rem;
+  background: none;
+  border: none;
+  border-radius: 0.7rem;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+.dock-tile:hover { color: var(--text-bright); background: var(--bg-alt); transform: translateY(-0.15rem); }
+.dock-tile.active { color: var(--accent); background: var(--accent-dim); }
+
+.dock-tile-icon { width: 1.15rem; height: 1.15rem; }
+.dock-tile-icon svg { width: 100%; height: 100%; stroke: currentColor; }
+.dock-tile-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.01em; }
+
+@media (max-width: 40rem) {
+  .dock { bottom: 1rem; gap: 0.15rem; padding: 0.35rem; }
+  .dock-tile { width: 2.9rem; padding: 0.45rem 0.2rem; }
+  .dock-tile-label { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dock-tile { transition: none; }
+}
