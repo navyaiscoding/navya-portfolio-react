@@ -11,19 +11,20 @@ Personal developer portfolio. Senior Frontend Engineer specializing in React, An
 
 ## Features
 
-- Light theme by default with a persisted dark mode toggle
+- Light theme by default with a persisted dark mode toggle, purple accent (`#663399` light / `#cea2fd` dark)
 - Animated, scrolling code-snippet background rendered from real snippets used in this app
+- Hero includes a browser-chrome-framed code mockup that types itself out live from real profile/skills data
+- Floating bottom Section Dock — icon tiles for About/Competencies/Skills/Experience/Contact, always visible, current section highlighted via scroll-spy. Replaces the old top navbar entirely
 - Command palette (`⌘K` / `Ctrl+K` or `/`) for jumping to any section
 - Scroll-reveal animations on sections and cards
 - Typewriter hero intro that cycles through role titles
 - Core Competencies grid and animated skill-proficiency bars
-- **Resume Fit Score** — a live LangGraph agent (not a single prompt) that takes a pasted job description and scores this resume's fit out of 100, with a self-critique step that checks its own score and strengths against the actual resume data before returning
 - Tabbed Experience section
 - Fully typed with TypeScript, including a typed content model in `src/data.ts`
 
 ## Tech stack
 
-React 18 · TypeScript · Vite · plain CSS (no UI framework) · Vercel serverless functions · LangGraph.js · Anthropic Claude API (Resume Fit Score)
+React 18 · TypeScript · Vite · plain CSS (no UI framework, component-scoped `.css` files)
 
 ## Getting started
 
@@ -33,19 +34,6 @@ npm run dev
 ```
 
 Opens at http://localhost:5173
-
-### Resume Fit Score setup (optional)
-
-The Resume Fit Score feature calls a Vercel serverless function (`api/fit-score.ts`) backed by the Anthropic API. To run it locally or deploy it:
-
-1. Get an API key from [console.anthropic.com](https://console.anthropic.com/settings/keys) and make sure the account has credit — a fresh key starts at $0 balance. Each run is 2 short Claude Haiku calls, so cost per run is a fraction of a cent.
-2. Copy `.env.example` to `.env` and set `ANTHROPIC_API_KEY`.
-3. `api/fit-score.ts` is a Vercel Function, not a Vite dev-server route — `npm run dev` alone won't serve it. Use the [Vercel CLI](https://vercel.com/docs/cli) and run `vercel dev` instead to test it locally.
-4. For production, add `ANTHROPIC_API_KEY` in Vercel → Project → Settings → Environment Variables, then redeploy.
-
-Without the key set (or without credit on the account), every other part of the site works normally — the fit-score form will just return an error.
-
-The endpoint has a basic in-memory per-instance rate limit (8 requests/hour/IP) as a first line of defense against abuse, since it's a public-facing endpoint that spends real API credits. That's a best-effort check only (serverless instances aren't persistent), so it's also worth adding a proper rate-limit rule in Vercel → Project → Settings → Firewall for real protection.
 
 ## Build for deployment
 
@@ -64,26 +52,34 @@ Serves the production build locally to sanity-check before deploying.
 ## Project structure
 
 ```
-api/
-  fit-score.ts           LangGraph agent (Vercel serverless function) behind the Resume Fit Score
-
 src/
-  App.tsx               page structure and components
-  data.ts                all content — profile, skills, core competencies, experience — with typed interfaces
-  hooks.ts                typed hooks: useReveal, useTheme, useTypewriter
-  CommandPalette.tsx      ⌘K / "/" command palette for section navigation
-  CodeBackground.tsx      animated scrolling code-snippet background
-  ResumeFitScore.tsx      frontend for the Resume Fit Score (calls api/fit-score.ts)
-  ContactForm.tsx         Formspree-backed contact form (currently disabled in App.tsx, see below)
-  index.css               theme (light default, [data-theme="dark"] override), layout, animations
-  main.tsx                app entry point
+  App.tsx                     page composition — assembles the components below
+  data.ts                     all content — profile, skills, core competencies, experience — with typed interfaces
+  hooks.ts                    typed hooks: useReveal, useTheme, useTypewriter, useTypedCode, useActiveSection
+  index.css                   global theme (light default, [data-theme="dark"] override), layout, animations
+  main.tsx                    app entry point
+
+  components/                 one folder per component, each with its own co-located .css
+    Nav/                       top bar — logo, command palette trigger, theme toggle
+    SectionDock/               floating bottom nav — icon tiles, active-section highlighting
+    CommandPalette/            ⌘K / "/" command palette
+    ThemeToggle/                light/dark switch
+    Hero/                      intro + HeroCodeMockup (self-typing code panel)
+    About/                     bio section
+    CoreCompetencies/          competencies grid
+    Skills/                    animated skill-proficiency cards
+    Experience/                 tabbed experience section
+    Contact/                    contact section (+ ContactForm, currently disabled — see below)
+    CodeBackground/            animated scrolling code-snippet background
+    Footer/
 ```
 
 ## Customizing
 
-- **Content:** edit `src/data.ts` — `profile` (including `bio`), `skills`, `coreCompetencies`, `experience`, and `roles` (hero typewriter titles). No layout code changes needed.
-- **Accent color:** `--accent` in `src/index.css` (light: `#0d9488`, dark: `#5ef1c4`).
+- **Content:** edit `src/data.ts` — `profile` (including `bio`), `skills`, `coreCompetencies`, `experience`, and `roles` (hero typewriter titles). The Hero code mockup and Section Dock both read from this file too, so content stays in sync automatically. No layout code changes needed.
+- **Accent color:** `--accent` in `src/index.css` (light: `#663399`, dark: `#cea2fd`).
 - **Theme default:** `useTheme()` in `src/hooks.ts` defaults to `'light'`.
+- **Section Dock:** edit `DOCK_ITEMS` in `src/components/SectionDock/SectionDock.tsx` to add, remove, or reorder nav tiles — each needs a matching section `id` in the page.
 - **Contact form:** `ContactForm` is built but currently commented out in `App.tsx` pending a live Formspree endpoint. Set `contactFormEndpoint` in `src/data.ts`, then uncomment the import and `<ContactForm />` usage in `App.tsx` to re-enable it.
 
 ## Contact

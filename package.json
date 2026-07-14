@@ -11,16 +11,12 @@
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "@anthropic-ai/sdk": "^0.32.0",
-    "@langchain/core": "^0.3.26",
-    "@langchain/langgraph": "^0.2.34"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.3.31",
     "@types/react-dom": "^18.2.22",
     "@vitejs/plugin-react": "^4.2.1",
-    "@vercel/node": "^3.2.0",
     "typescript": "^5.4.5",
     "vite": "^5.1.0"
   }

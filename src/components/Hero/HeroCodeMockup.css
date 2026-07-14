@@ -1,0 +1,51 @@
+.hero-mockup {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  width: 100%;
+  max-width: 28rem;
+  justify-self: center;
+}
+
+.hero-mockup-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.7rem 0.9rem;
+  background: var(--bg-alt);
+  border-bottom: 1px solid var(--border);
+}
+.hero-mockup-dot { width: 0.6rem; height: 0.6rem; border-radius: 50%; flex-shrink: 0; }
+.dot-red { background: #ff5f56; }
+.dot-yellow { background: #ffbd2e; }
+.dot-green { background: #27c93f; }
+.hero-mockup-title { margin-left: 0.5rem; font-size: 0.75rem; color: var(--muted); }
+
+.hero-mockup-body {
+  padding: 1.1rem 1.2rem;
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: var(--text);
+  min-height: 12rem;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.hero-mockup-body .tok-kw { color: var(--accent); }
+.hero-mockup-body .tok-str { color: var(--text-bright); }
+.hero-mockup-body .tok-punct { color: var(--muted); }
+
+.hero-mockup-cursor {
+  display: inline-block;
+  width: 0.5rem;
+  height: 1em;
+  vertical-align: text-bottom;
+  background: var(--accent);
+  margin-left: 0.15rem;
+  animation: blink 1s step-end infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-mockup-cursor { animation: none; }
+}

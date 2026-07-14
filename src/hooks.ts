@@ -31,6 +31,39 @@ export function useReveal<T extends HTMLElement = HTMLElement>(): RevealResult<T
   return { ref, className: `reveal ${visible ? 'visible' : ''}` }
 }
 
+// Tracks which of the given section ids is currently centered in the
+// viewport, for scroll-spy style navigation highlighting.
+export function useActiveSection(ids: string[]): string {
+  const idsKey = ids.join(',')
+  const [active, setActive] = useState(ids[0] ?? '')
+
+  useEffect(() => {
+    const sectionIds = idsKey ? idsKey.split(',') : []
+    const elements = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null)
+
+    if (elements.length === 0) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.filter((entry) => entry.isIntersecting)
+        if (visible.length === 0) return
+        const topmost = visible.reduce((a, b) =>
+          a.boundingClientRect.top < b.boundingClientRect.top ? a : b
+        )
+        setActive(topmost.target.id)
+      },
+      { rootMargin: '-45% 0px -45% 0px', threshold: 0 }
+    )
+
+    elements.forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
+  }, [idsKey])
+
+  return active
+}
+
 interface ThemeResult {
   theme: Theme
   toggle: () => void
@@ -52,6 +85,26 @@ export function useTheme(): ThemeResult {
 
   const toggle = () => setTheme((t) => (t === 'light' ? 'dark' : 'light'))
   return { theme, toggle }
+}
+
+interface TypedCodeResult {
+  typed: string
+  done: boolean
+}
+
+// Types out a fixed multi-line string once, character by character, and stops.
+export function useTypedCode(code: string, speed = 16): TypedCodeResult {
+  const [typed, setTyped] = useState('')
+
+  useEffect(() => {
+    if (typed.length >= code.length) return
+    const timeout = setTimeout(() => {
+      setTyped(code.slice(0, typed.length + 1))
+    }, speed)
+    return () => clearTimeout(timeout)
+  }, [typed, code, speed])
+
+  return { typed, done: typed.length >= code.length }
 }
 
 interface TypewriterOptions {
