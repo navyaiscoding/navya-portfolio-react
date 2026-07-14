@@ -15,13 +15,9 @@ export default function Hero() {
             I'm a <span className="accent">{typed}</span>
             <span className="cursor">&nbsp;</span>
           </h2>
-          <p className="hero-sub">{profile.title}</p>
-          <p className="mono muted">
-            {profile.location} · {profile.availability}
-          </p>
           <div className="hero-cta">
             <a className="btn" href="#experience">View Experience</a>
-            <a className="btn btn-ghost" href={`mailto:${profile.email}`}>Get in Touch</a>
+            <a className="btn btn-ghost" href="#contact">Get in Touch</a>
           </div>
         </div>
         <HeroCodeMockup />

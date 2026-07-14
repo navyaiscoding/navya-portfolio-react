@@ -109,7 +109,6 @@ export const navSearchItems: NavSearchItem[] = [
   { id: 'about', label: 'About', group: 'Sections', keywords: 'about summary bio' },
   { id: 'competencies', label: 'Core Competencies', group: 'Sections', keywords: 'competencies strengths capabilities' },
   { id: 'skills', label: 'Skills', group: 'Sections', keywords: 'skills tech stack' },
-  { id: 'ai-tailor', label: 'AI Resume Tailor', group: 'Sections', keywords: 'ai agent langgraph tailor resume workflow' },
   { id: 'experience', label: 'Experience', group: 'Sections', keywords: 'experience work history jobs' },
   { id: 'contact', label: 'Contact', group: 'Sections', keywords: 'contact email message reach out' },
 ]

@@ -13,7 +13,6 @@ const NAV_LINKS: NavLink[] = [
   { id: 'about', label: 'About' },
   { id: 'competencies', label: 'Competencies' },
   { id: 'skills', label: 'Skills' },
-  { id: 'ai-tailor', label: 'AI Tailor' },
   { id: 'experience', label: 'Experience' },
   { id: 'contact', label: 'Contact' },
 ]
