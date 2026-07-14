@@ -5,6 +5,10 @@
   transform: translateX(-50%);
   z-index: 60;
   display: flex;
+  justify-content: space-between;
+  width: 50vw;
+  max-width: 44rem;
+  min-width: 26rem;
   gap: 0.3rem;
   padding: 0.4rem;
   background: color-mix(in srgb, var(--card) 92%, transparent);
@@ -16,11 +20,11 @@
 
 .dock-tile {
   display: flex;
+  flex: 1;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 0.2rem;
-  width: 3.6rem;
   padding: 0.5rem 0.3rem;
   background: none;
   border: none;
@@ -37,8 +41,8 @@
 .dock-tile-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.01em; }
 
 @media (max-width: 40rem) {
-  .dock { bottom: 1rem; gap: 0.15rem; padding: 0.35rem; }
-  .dock-tile { width: 2.9rem; padding: 0.45rem 0.2rem; }
+  .dock { bottom: 1rem; width: 90vw; min-width: 0; gap: 0.15rem; padding: 0.35rem; }
+  .dock-tile { padding: 0.45rem 0.2rem; }
   .dock-tile-label { display: none; }
 }
 
