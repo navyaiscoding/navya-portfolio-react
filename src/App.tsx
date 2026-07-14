@@ -2,9 +2,7 @@ import { useState } from 'react'
 import { profile, skills, experience, roles, coreCompetencies, type SkillGroup } from './data'
 import { useReveal, useTheme, useTypewriter, type Theme } from './hooks'
 import CommandPalette from './CommandPalette'
-// import ContactForm from './ContactForm'
 import CodeBackground from './CodeBackground'
-import ResumeFitScore from './ResumeFitScore'
 
 interface NavLink {
   id: string
@@ -207,18 +205,6 @@ function Skills() {
   )
 }
 
-function FitScoreSection() {
-  const { ref, className } = useReveal()
-  return (
-    <section className="section" id="fit-score" ref={ref}>
-      <div className={className}>
-        <SectionHeading title="Resume Fit Score" />
-        <ResumeFitScore />
-      </div>
-    </section>
-  )
-}
-
 function Experience() {
   const [active, setActive] = useState(0)
   const { ref, className } = useReveal()
@@ -299,7 +285,6 @@ export default function App() {
           <About />
           <CoreCompetencies />
           <Skills />
-          <FitScoreSection />
           <Experience />
           <Contact />
         </main>
