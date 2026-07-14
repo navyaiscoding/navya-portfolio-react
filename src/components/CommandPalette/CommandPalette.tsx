@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { navSearchItems, type NavSearchItem } from './data'
+import { navSearchItems, type NavSearchItem } from '../../data'
+import './CommandPalette.css'
 
 function isTypingTarget(el: EventTarget | null): boolean {
   if (!(el instanceof HTMLElement)) return false

@@ -1,0 +1,19 @@
+.competencies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13.75rem, 1fr));
+  gap: 0.875rem;
+}
+.competency-card {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 0.875rem 1rem;
+  font-size: 0.9rem;
+  color: var(--text);
+  box-shadow: var(--shadow);
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.competency-card:hover { border-color: var(--accent); transform: translateY(-0.1875rem); box-shadow: var(--shadow-lg); }

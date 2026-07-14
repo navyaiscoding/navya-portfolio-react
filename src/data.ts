@@ -45,7 +45,7 @@ export const roles: string[] = [
 
 export const profile: Profile = {
   name: 'Navya Anumula',
-  title: 'Senior Frontend Engineer — React, Angular & TypeScript',
+  title: 'Senior Software Engineer — React, Angular, TypeScript & Node.js',
   location: 'Stockholm, Sweden',
   availability: 'Full EU Work Authorization · Available Immediately',
   email: 'navyaanumula@gmail.com',

@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react'
-import { profile, contactFormEndpoint } from './data'
+import { profile, contactFormEndpoint } from '../../data'
+import './ContactForm.css'
 
 type Status = 'idle' | 'submitting' | 'success' | 'error'
 
@@ -17,8 +18,6 @@ export default function ContactForm() {
     setStatus('submitting')
 
     if (!usingFormspree) {
-      // No form backend configured yet — fall back to opening the visitor's
-      // email client with the message pre-filled.
       const subject = encodeURIComponent(`Portfolio contact from ${name}`)
       const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`)
       window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`

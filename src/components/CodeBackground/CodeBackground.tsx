@@ -1,4 +1,5 @@
 import { Fragment, type ReactNode } from 'react'
+import './CodeBackground.css'
 
 const SNIPPETS: string[] = [
   `export function useTheme(): ThemeResult {

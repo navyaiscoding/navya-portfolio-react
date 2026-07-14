@@ -1,0 +1,2 @@
+.about-text { max-width: 45rem; font-size: 1.05rem; color: var(--text); }
+.about-text p + p { margin-top: 1rem; }
