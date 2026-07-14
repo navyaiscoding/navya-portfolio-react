@@ -5,7 +5,7 @@
   box-shadow: var(--shadow-lg);
   overflow: hidden;
   width: 100%;
-  max-width: 26rem;
+  max-width: 28rem;
   justify-self: center;
 }
 
@@ -28,8 +28,9 @@
   font-size: 0.85rem;
   line-height: 1.7;
   color: var(--text);
-  min-height: 9.5rem;
-  white-space: pre;
+  min-height: 12rem;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 .hero-mockup-body .tok-kw { color: var(--accent); }
 .hero-mockup-body .tok-str { color: var(--text-bright); }
