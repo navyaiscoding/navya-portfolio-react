@@ -5,6 +5,16 @@
   justify-content: center;
   padding: 2.5rem 0;
 }
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 3rem;
+}
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .hero-mockup { max-width: 30rem; }
+}
 .hero h1 {
   font-size: clamp(2.5rem, 7vw, 4.5rem);
   color: var(--text-bright);

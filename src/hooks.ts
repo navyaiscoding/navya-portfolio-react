@@ -54,6 +54,26 @@ export function useTheme(): ThemeResult {
   return { theme, toggle }
 }
 
+interface TypedCodeResult {
+  typed: string
+  done: boolean
+}
+
+// Types out a fixed multi-line string once, character by character, and stops.
+export function useTypedCode(code: string, speed = 16): TypedCodeResult {
+  const [typed, setTyped] = useState('')
+
+  useEffect(() => {
+    if (typed.length >= code.length) return
+    const timeout = setTimeout(() => {
+      setTyped(code.slice(0, typed.length + 1))
+    }, speed)
+    return () => clearTimeout(timeout)
+  }, [typed, code, speed])
+
+  return { typed, done: typed.length >= code.length }
+}
+
 interface TypewriterOptions {
   typingSpeed?: number
   deletingSpeed?: number
