@@ -24,7 +24,7 @@ export interface NavSearchItem {
   keywords: string
 }
 
-export const contactFormEndpoint = ''
+export const contactFormEndpoint = import.meta.env.VITE_CONTACT_API_URL ?? ''
 
 export interface ExperienceEntry {
   role: string
