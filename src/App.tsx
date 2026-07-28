@@ -1,5 +1,4 @@
 import About from './components/About/About'
-import Contact from './components/Contact/Contact'
 import CoreCompetencies from './components/CoreCompetencies/CoreCompetencies'
 import Experience from './components/Experience/Experience'
 import Footer from './components/Footer/Footer'
@@ -9,6 +8,7 @@ import SectionDock from './components/SectionDock/SectionDock'
 import Skills from './components/Skills/Skills'
 import CodeBackground from './components/CodeBackground/CodeBackground'
 import { useTheme } from './hooks'
+import ContactForm from './components/ContactForm/ContactForm'
 
 export default function App() {
   const { theme, toggle } = useTheme()
@@ -23,7 +23,7 @@ export default function App() {
           <CoreCompetencies />
           <Skills />
           <Experience />
-          <Contact />
+          <ContactForm />
         </main>
         <Footer />
       </div>

@@ -142,3 +142,34 @@ export function useTypewriter(
 
   return text
 }
+
+export function useCoreCompetencies() {
+  const [competencies, setCompetencies] = useState<string[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    const url = import.meta.env.VITE_COMPETENCIES_API_URL
+    if (!url) {
+      setLoading(false)
+      return
+    }
+
+    fetch(url)
+      .then((res) => {
+        if (!res.ok) throw new Error(`Request failed: ${res.status}`)
+          return res.json()
+      })
+      .then((data: { ok: boolean; competencies: string[] }) => {
+        setCompetencies(data.competencies)
+      })
+      .catch((err) => {
+        setError(err instanceof Error ? err.message : 'Failed to load competencies')
+      })
+      .finally(() => {
+        setLoading(false)
+      })
+  }, [])
+
+  return { competencies, loading, error }
+}
