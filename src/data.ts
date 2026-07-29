@@ -24,7 +24,7 @@ export interface NavSearchItem {
   keywords: string
 }
 
-export const contactFormEndpoint = ''
+export const contactFormEndpoint = import.meta.env.VITE_CONTACT_API_URL ?? ''
 
 export interface ExperienceEntry {
   role: string
@@ -158,6 +158,7 @@ export const experience: ExperienceEntry[] = [
     period: '06/2019 – 04/2022',
     bullets: [
       'Engineered and maintained React Native modules for a digital wallet feature in a high-volume UAE-based mobile banking app.',
+      'Successfully delivered 3 consecutive releases of VISA Click to Pay for a UK-based bank.',
       "Delivered the Virtual Card feature for a UK-based bank, integrating with the Card Management team.",
       'Resolved production issues in close collaboration with backend engineers for stable, high-volume banking releases.',
     ],

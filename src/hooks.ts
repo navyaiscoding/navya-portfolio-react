@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type RefObject } from 'react'
+import { MIN_LOADING_MS } from './constants/coreCompetencies'
 
 export type Theme = 'light' | 'dark'
 
@@ -141,4 +142,44 @@ export function useTypewriter(
   }, [text, deleting, wordIndex, words, typingSpeed, deletingSpeed, pause])
 
   return text
+}
+
+export function useCoreCompetencies() {
+  const [competencies, setCompetencies] = useState<string[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    const url = import.meta.env.VITE_COMPETENCIES_API_URL
+    const startedAt = Date.now()
+    let timeoutId: ReturnType<typeof setTimeout>
+
+    const stopLoading = () => {
+      const elapsed = Date.now() - startedAt
+      const remaining = Math.max(0, MIN_LOADING_MS - elapsed)
+      timeoutId = setTimeout(() => setLoading(false), remaining)
+    }
+
+    if (!url) {
+      stopLoading()
+      return () => clearTimeout(timeoutId)
+    }
+
+    fetch(url)
+      .then((res) => {
+        if (!res.ok) throw new Error(`Request failed: ${res.status}`)
+        return res.json()
+      })
+      .then((data: { ok: boolean; competencies: string[] }) => {
+        setCompetencies(data.competencies)
+      })
+      .catch((err) => {
+        setError(err instanceof Error ? err.message : 'Failed to load competencies')
+      })
+      .finally(stopLoading)
+
+    return () => clearTimeout(timeoutId)
+  }, [])
+
+  return { competencies, loading, error }
 }
