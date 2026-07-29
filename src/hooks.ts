@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type RefObject } from 'react'
-import { MIN_LOADING_MS } from './constants/coreCompetencies'
+import { competenciesEndpoint, MIN_LOADING_MS } from './constants/coreCompetencies'
 
 export type Theme = 'light' | 'dark'
 
@@ -150,7 +150,7 @@ export function useCoreCompetencies() {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    const url = import.meta.env.VITE_COMPETENCIES_API_URL
+    const url = competenciesEndpoint
     const startedAt = Date.now()
     let timeoutId: ReturnType<typeof setTimeout>
 
@@ -158,11 +158,6 @@ export function useCoreCompetencies() {
       const elapsed = Date.now() - startedAt
       const remaining = Math.max(0, MIN_LOADING_MS - elapsed)
       timeoutId = setTimeout(() => setLoading(false), remaining)
-    }
-
-    if (!url) {
-      stopLoading()
-      return () => clearTimeout(timeoutId)
     }
 
     fetch(url)
