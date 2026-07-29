@@ -17,3 +17,30 @@
   transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
 }
 .competency-card:hover { border-color: var(--accent); transform: translateY(-0.1875rem); box-shadow: var(--shadow-lg); }
+
+.competency-card.skeleton {
+  position: relative;
+  overflow: hidden;
+  pointer-events: none;
+}
+.competency-card.skeleton span {
+  display: block;
+  width: 65%;
+  height: 0.9rem;
+  border-radius: 0.25rem;
+  background: var(--border);
+}
+.competency-card.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--accent) 18%, transparent), transparent);
+  animation: competency-shimmer 1.4s ease-in-out infinite;
+}
+@keyframes competency-shimmer {
+  100% { transform: translateX(100%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .competency-card.skeleton::after { animation: none; }
+}
