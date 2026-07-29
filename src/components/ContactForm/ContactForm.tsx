@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react'
-import { profile, contactFormEndpoint } from '../../data'
+import { profile } from '../../data'
 import './ContactForm.css'
+import { contactFormEndpoint } from '../../constants/coreCompetencies'
 
 type Status = 'idle' | 'submitting' | 'success' | 'error'
 
