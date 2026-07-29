@@ -3,9 +3,10 @@
 [![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)](https://react.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 [![Vite](https://img.shields.io/badge/Vite-5-646CFF?logo=vite&logoColor=white)](https://vitejs.dev)
+[![Node.js](https://img.shields.io/badge/Node.js-Express-339933?logo=node.js&logoColor=white)](https://expressjs.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-lightgrey.svg)](./LICENSE)
 
-Personal developer portfolio. Senior Frontend Engineer specializing in React, Angular, TypeScript, and React Native. Built with React, TypeScript, and Vite.
+Personal developer portfolio. Senior Frontend Engineer specializing in React, Angular, TypeScript, and React Native. Built with React, TypeScript, and Vite, backed by a small Node.js/Express API deployed as Vercel serverless functions.
 
 **Live site:** [navya-anumula-portfolio.vercel.app](https://navya-anumula-portfolio.vercel.app/)
 
@@ -18,22 +19,26 @@ Personal developer portfolio. Senior Frontend Engineer specializing in React, An
 - Command palette (`⌘K` / `Ctrl+K` or `/`) for jumping to any section
 - Scroll-reveal animations on sections and cards
 - Typewriter hero intro that cycles through role titles
-- Core Competencies grid and animated skill-proficiency bars
+- Core Competencies grid, fetched live from a Node/Express API (`/api/competencies`) with a skeleton loading state and a silent fallback to static data if the request fails
+- Animated skill-proficiency bars
 - Tabbed Experience section
 - Fully typed with TypeScript, including a typed content model in `src/data.ts`
 
 ## Tech stack
 
-React 18 · TypeScript · Vite · plain CSS (no UI framework, component-scoped `.css` files)
+**Frontend:** React 18 · TypeScript · Vite · plain CSS (no UI framework, component-scoped `.css` files)
+**API:** Node.js · Express · TypeScript · Zod (validation) · Nodemailer, deployed as Vercel serverless functions alongside the frontend
 
 ## Getting started
 
 ```
 npm install
-npm run dev
+vercel dev
 ```
 
-Opens at http://localhost:5173
+`vercel dev` serves both the frontend and the `/api` functions from one process, so the Core Competencies fetch and the contact form work end to end locally. Opens at `http://localhost:3000` by default.
+
+Plain `npm run dev` (Vite only, no API) also works for frontend-only work — the Core Competencies grid falls back to static data and the contact form fails gracefully in that mode, since there's no API to hit.
 
 ## Build for deployment
 
@@ -41,7 +46,7 @@ Opens at http://localhost:5173
 npm run build
 ```
 
-Runs a TypeScript project check (`tsc -b`) before building, so type errors are caught before deploy. Outputs a static `dist/` folder — deployed on Vercel.
+Runs a TypeScript project check (`tsc -b`) before building, so type errors are caught before deploy. Outputs a static `dist/` folder.
 
 ```
 npm run preview
@@ -49,13 +54,32 @@ npm run preview
 
 Serves the production build locally to sanity-check before deploying.
 
+## API
+
+The API lives in `server/` (Express app, routes, controllers, middleware, validation) and is deployed via a single catch-all Vercel serverless function, `api/[...path].ts`, which re-exports the Express app directly — no route rewriting needed, since Vercel passes the original request path through.
+
+**Endpoints:**
+- `GET /api/health` — liveness check
+- `GET /api/competencies` — returns the core competencies list
+
+**Local development:** `vercel dev` runs the API alongside the frontend on the same origin — no CORS config needed. The standalone `server/` app (`cd server && npm run dev`) also still works independently for API-only testing via curl, on `localhost:4000`.
+
+**Environment variables** (set in Vercel project settings for production, or `server/.env` for standalone local testing — see `server/.env.example`):
+
+Full details in [`server/README.md`](./server/README.md).
+
 ## Project structure
 
 ```
+api/
+  [...path].ts               catch-all Vercel serverless function — re-exports the Express app from server/
+
+server/                       Express API source (see server/README.md)
+
 src/
   App.tsx                     page composition — assembles the components below
   data.ts                     all content — profile, skills, core competencies, experience — with typed interfaces
-  hooks.ts                    typed hooks: useReveal, useTheme, useTypewriter, useTypedCode, useActiveSection
+  hooks.ts                    typed hooks: useReveal, useTheme, useTypewriter, useTypedCode, useActiveSection, useCoreCompetencies
   index.css                   global theme (light default, [data-theme="dark"] override), layout, animations
   main.tsx                    app entry point
 
@@ -66,21 +90,19 @@ src/
     ThemeToggle/                light/dark switch
     Hero/                      intro + HeroCodeMockup (self-typing code panel)
     About/                     bio section
-    CoreCompetencies/          competencies grid
+    CoreCompetencies/          competencies grid — fetched live via useCoreCompetencies, skeleton loader, static fallback
     Skills/                    animated skill-proficiency cards
     Experience/                 tabbed experience section
-    Contact/                    contact section (+ ContactForm, currently disabled — see below)
     CodeBackground/            animated scrolling code-snippet background
     Footer/
 ```
 
 ## Customizing
 
-- **Content:** edit `src/data.ts` — `profile` (including `bio`), `skills`, `coreCompetencies`, `experience`, and `roles` (hero typewriter titles). The Hero code mockup and Section Dock both read from this file too, so content stays in sync automatically. No layout code changes needed.
+- **Content:** edit `src/data.ts` — `profile` (including `bio`), `skills`, `coreCompetencies`, `experience`, and `roles` (hero typewriter titles). The Hero code mockup and Section Dock both read from this file too, so content stays in sync automatically. `coreCompetencies` also doubles as the static fallback if the live API fetch fails. No layout code changes needed.
 - **Accent color:** `--accent` in `src/index.css` (light: `#663399`, dark: `#cea2fd`).
 - **Theme default:** `useTheme()` in `src/hooks.ts` defaults to `'light'`.
 - **Section Dock:** edit `DOCK_ITEMS` in `src/components/SectionDock/SectionDock.tsx` to add, remove, or reorder nav tiles — each needs a matching section `id` in the page.
-- **Contact form:** `ContactForm` is built but currently commented out in `App.tsx` pending a live Formspree endpoint. Set `contactFormEndpoint` in `src/data.ts`, then uncomment the import and `<ContactForm />` usage in `App.tsx` to re-enable it.
 
 ## Contact
 
