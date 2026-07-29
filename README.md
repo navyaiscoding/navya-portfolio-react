@@ -74,7 +74,19 @@ Full details in [`server/README.md`](./server/README.md).
 api/
   [...path].ts               catch-all Vercel serverless function — re-exports the Express app from server/
 
-server/                       Express API source (see server/README.md)
+server/                       Express API source (see server/README.md for the full write-up)
+  src/
+    index.ts                   starts the standalone HTTP server (local dev only)
+    app.ts                     builds the Express app: middleware + routes — this is what api/[...path].ts imports
+    config/env.ts               typed environment config
+    data/coreCompetencies.ts    the core competencies list served by GET /api/competencies
+    routes/                     URL path -> controller (health, contact, competencies)
+    controllers/                 request handling logic
+    services/mailer.ts           sends (or logs, in dev mode) contact emails
+    schemas/                     Zod request-validation schemas
+    middleware/                   validate, rateLimiter, errorHandler, notFound
+    utils/ApiError.ts             typed error with an HTTP status
+    types/                        shared TypeScript types
 
 src/
   App.tsx                     page composition — assembles the components below
