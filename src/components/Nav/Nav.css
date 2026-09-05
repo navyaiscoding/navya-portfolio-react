@@ -16,6 +16,6 @@
   justify-content: space-between;
   gap: 1rem;
 }
-.nav-logo { font-family: var(--mono); font-weight: 600; color: var(--text-bright); font-size: 1rem; }
+.nav-logo { font-weight: 600; color: var(--text-bright); font-size: 1rem; }
 .nav-logo .prompt { color: var(--accent); }
 .nav-right { display: flex; align-items: center; gap: 1.25rem; }

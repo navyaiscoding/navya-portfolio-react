@@ -27,7 +27,7 @@ export default function Experience() {
             <h3>
               {experience[active].role} <span className="accent">@ {experience[active].company}</span>
             </h3>
-            <p className="mono muted small">{experience[active].period} · {experience[active].stack}</p>
+            <p className="muted small">{experience[active].period} · {experience[active].stack}</p>
             <ul className="project-highlights">
               {experience[active].bullets.map((b) => (
                 <li key={b}>{b}</li>

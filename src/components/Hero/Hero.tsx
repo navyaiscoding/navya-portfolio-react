@@ -9,7 +9,7 @@ export default function Hero() {
     <section className="hero" id="top">
       <div className="hero-grid">
         <div className="hero-copy">
-          <p className="mono accent">Hi, my name is</p>
+          <p className="accent">Hi, my name is</p>
           <h1>{profile.name}.</h1>
           <h2 className="hero-title">
             I'm a <span className="accent">{typed}</span>

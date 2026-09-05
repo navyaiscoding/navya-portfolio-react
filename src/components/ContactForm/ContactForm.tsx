@@ -64,7 +64,7 @@ export default function ContactForm() {
   return (
     <form className="contact-form" onSubmit={handleSubmit}>
       <div className="contact-form-row">
-        <label className="mono small" htmlFor="cf-name">Name</label>
+        <label className="small" htmlFor="cf-name">Name</label>
         <input
           id="cf-name"
           type="text"
@@ -75,7 +75,7 @@ export default function ContactForm() {
         />
       </div>
       <div className="contact-form-row">
-        <label className="mono small" htmlFor="cf-email">Email</label>
+        <label className="small" htmlFor="cf-email">Email</label>
         <input
           id="cf-email"
           type="email"
@@ -86,7 +86,7 @@ export default function ContactForm() {
         />
       </div>
       <div className="contact-form-row">
-        <label className="mono small" htmlFor="cf-message">Message</label>
+        <label className="small" htmlFor="cf-message">Message</label>
         <textarea
           id="cf-message"
           value={message}
@@ -97,7 +97,7 @@ export default function ContactForm() {
         />
       </div>
       {status === 'error' && (
-        <p className="contact-form-error mono small">
+        <p className="contact-form-error small">
           Something went wrong sending that — try again, or email me directly at {profile.email}.
         </p>
       )}

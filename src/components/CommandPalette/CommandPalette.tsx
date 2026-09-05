@@ -66,7 +66,7 @@ export default function CommandPalette() {
           <circle cx="11" cy="11" r="7" />
           <path d="M21 21l-4.35-4.35" />
         </svg>
-        <span className="mono palette-hint">/</span>
+        <span className="palette-hint">/</span>
       </button>
     )
   }
@@ -81,7 +81,6 @@ export default function CommandPalette() {
           </svg>
           <input
             ref={inputRef}
-            className="mono"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Jump to a section..."
@@ -97,10 +96,10 @@ export default function CommandPalette() {
               }
             }}
           />
-          <span className="mono palette-esc">esc</span>
+          <span className="palette-esc">esc</span>
         </div>
         <ul className="palette-list">
-          {filtered.length === 0 && <li className="palette-empty mono">No matches</li>}
+          {filtered.length === 0 && <li className="palette-empty">No matches</li>}
           {filtered.map((item, i) => (
             <li key={item.id}>
               <button
@@ -109,7 +108,7 @@ export default function CommandPalette() {
                 onClick={() => jumpTo(item.id)}
               >
                 <span>{item.label}</span>
-                <span className="mono muted small">{item.group}</span>
+                <span className="muted small">{item.group}</span>
               </button>
             </li>
           ))}
