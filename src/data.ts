@@ -69,19 +69,19 @@ export const skills: SkillGroup[] = [
   },
   {
     category: 'Testing & Quality',
-    items: ['Jest', 'Enzyme', 'React Testing Library', 'Postman', 'Accessibility (WCAG)', 'SEO', 'SonarQube'],
+    items: ['Jest', 'React Testing Library', 'Postman'],
   },
   {
     category: 'DevOps & Tooling',
-    items: ['Git', 'GitHub', 'Azure DevOps', 'CI/CD Pipelines', 'Jenkins', 'Webpack', 'Vite', 'Figma'],
+    items: ['Git', 'GitHub','Jenkins', 'Webpack', 'Vite', 'Figma'],
   },
   {
     category: 'Backend & APIs',
-    items: ['Node.js', 'GraphQL', 'REST APIs', 'SQL', 'PostgreSQL', 'JWT', 'OAuth'],
+    items: ['Node.js', 'GraphQL', 'PostgreSQL'],
   },
   {
     category: 'AI-Assisted Development',
-    items: ['GitHub Copilot', 'Cursor', 'Claude', 'LangGraph'],
+    items: ['GitHub Copilot', 'Cursor', 'Claude'],
   },
 ]
 
