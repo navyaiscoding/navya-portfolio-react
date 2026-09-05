@@ -14,7 +14,6 @@ export interface Profile {
 export interface SkillGroup {
   category: string
   items: string[]
-  level: number
 }
 
 export interface NavSearchItem {
@@ -53,8 +52,9 @@ export const profile: Profile = {
   summary:
     'Senior Frontend Engineer with 7 years of experience building production web and mobile applications in React, Angular, TypeScript, and React Native across banking, financial services, healthcare, and e-commerce. Skilled in frontend architecture, performance and SEO optimization, and REST API integration, with a track record of defining frontend development standards, mentoring engineers, and leading Agile delivery from sprint planning through retrospectives.',
   bio: [
-    "I'm a frontend engineer who likes making complex systems feel simple to use. Over the past 7 years I've built and scaled production applications across banking, healthcare, and e-commerce — mostly in React, Angular, and TypeScript, with a stint in React Native for mobile banking. I care as much about how a codebase feels to work in as how the product feels to use, which is why I spend a lot of time on architecture, performance, and the small decisions that help a team move faster.",
-    "Lately I've been leaning into AI-assisted development, pairing tools like Copilot and Cursor with solid engineering fundamentals rather than treating them as a shortcut. I'm based in Stockholm with full EU work authorization, and open to senior frontend and full-stack roles.",
+    "Give me a codebase I've never seen, a language I haven't touched, or a problem nobody's solved yet, and my first move is never to ask for a ramp-up plan. It's to always start reading, start testing, and start building.", 
+      "For close to 7 years, that instinct is what's mattered more than any single tool: picking up whatever a project actually needed, usually within days, and shipping something real rather than waiting to be fully comfortable first. I have set frontend architecture on complex platforms, led teams to take business problems from idea to release with full ownership, mentored junior engineers through code review, and treat Gen AI- assisted development as a daily part of the workflow rather than a novelty.",
+    "Coding keeps me busy, but outside the world of programming I like to keep myself occupied with reading, cooking and spending ample time in the nature.",
   ],
 }
 
@@ -62,32 +62,26 @@ export const skills: SkillGroup[] = [
   {
     category: 'Frontend',
     items: ['React', 'Angular', 'Next.js', 'TypeScript', 'JavaScript (ES6+)', 'React Native', 'HTML5', 'CSS3', 'SCSS', 'Tailwind CSS', 'Storybook'],
-    level: 95,
   },
   {
     category: 'State Management & Architecture',
     items: ['Redux', 'Redux Saga', 'RxJs', 'React Context', 'Custom Hooks', 'Server-Side Rendering (SSR)'],
-    level: 88,
   },
   {
     category: 'Testing & Quality',
     items: ['Jest', 'Enzyme', 'React Testing Library', 'Postman', 'Accessibility (WCAG)', 'SEO', 'SonarQube'],
-    level: 90,
   },
   {
     category: 'DevOps & Tooling',
     items: ['Git', 'GitHub', 'Azure DevOps', 'CI/CD Pipelines', 'Jenkins', 'Webpack', 'Vite', 'Figma'],
-    level: 80,
   },
   {
     category: 'Backend & APIs',
     items: ['Node.js', 'GraphQL', 'REST APIs', 'SQL', 'PostgreSQL', 'JWT', 'OAuth'],
-    level: 70,
   },
   {
     category: 'AI-Assisted Development',
     items: ['GitHub Copilot', 'Cursor', 'Claude', 'LangGraph'],
-    level: 90,
   },
 ]
 
@@ -113,29 +107,32 @@ export const navSearchItems: NavSearchItem[] = [
 
 export const experience: ExperienceEntry[] = [
   {
-    role: 'Consultant',
+    role: 'Software Engineer',
     company: 'Deloitte',
-    stack: 'Angular, Next.js, TypeScript, GenAI',
+    stack: 'React, Angular, Next.js, TypeScript, GenAI',
     period: '11/2024 – 02/2026',
     bullets: [
-      'Established scalable frontend architecture and engineering standards for a complex e-commerce platform, by documenting frontend development standards and building a shared Storybook component library.',
-      'Improved page speed and search visibility for a licensing e-commerce platform by implementing Server-Side Rendering (SSR) with Next.js and TypeScript.',
-      'Delivered two consecutive Angular releases for a US-based healthcare digital platform.',
-      'Increased design-to-development speed by integrating Figma MCP and Cursor AI into the codebase to generate responsive UI directly from designs.',
-      'Maintained 88% test coverage and strengthened release confidence via Jest/React Testing Library, leading code reviews and mentoring during sprint planning, stand-ups, and retrospectives.',
-    ],
+        "Delivered two e-commerce applications built on React, Next.js and TypeScript on the frontend and Node.js on the backend, from scratch, promoting coding standards and engineering best practices.",
+        "Standardised the frontend and documentation for a monorepo architecture, building a shared library for reusable UI components using Storybook, used across teams.",
+        "Developed end-to-end features analysing business requirements through stakeholder communication, product design, setting up automated pipelines for deployment, and building APIs.",
+        "Actively participated in Agile sprint planning and retrospectives to ensure proper estimation and assignment of stories, as well as work on stakeholder feedback.",
+        "Ensured interface accessibility in accordance with WCAG standards, implementing ARIA labeling and conducting screen-reader testing.",
+        "Integrated the Figma MCP server into Cursor to generate UI directly from designs using GenAI, speeding up implementation.",
+      ],
   },
   {
-    role: 'Technology Analyst',
+    role: 'Senior Frontend Developer',
     company: 'Infosys',
-    stack: 'React, TypeScript, GraphQL',
+    stack: 'React, TypeScript, Node.js, GraphQL',
     period: '07/2023 – 11/2024',
     bullets: [
-      'Designed and developed a React.js/TypeScript Service Request Platform with role-based approval workflows.',
-      'Engineered .NET and GraphQL API integration patterns for seamless frontend-backend collaboration.',
-      'Conducted technical interviews for frontend developer roles, strengthening the hiring pipeline.',
-      'Mentored junior developers through code reviews and technical guidance during daily stand-ups.',
-    ],
+      "Migrated a legacy platform to React.js and TypeScript, leading a team of developers from ground-up to release through evolving requirements.",
+        "Architected and developed the Node.js APIs in the initial phase of app development, contributing to technical decisions to keep the system maintainable and scalable as it grew.",
+        "Integrated frontend applications with REST & GraphQL APIs alongside backend services.",
+        "Mentored junior developers through pair programming and feedback, reducing defects towards the release.",
+        "Set up CI/CD pipelines using GitHub to automate deployments, cutting down manual release effort.",
+        "Improved test coverage and resolved production defects, leading peer code reviews and mentoring engineers along the way by promoting coding standards and engineering best practices",
+      ],
   },
   {
     role: 'Senior Systems Engineer',
@@ -143,10 +140,10 @@ export const experience: ExperienceEntry[] = [
     stack: 'React, TypeScript, Node.js',
     period: '05/2022 – 06/2023',
     bullets: [
-      'Modernized a 10-year-old legacy stock-locate platform via migration to React, increasing user engagement by 60% with fewer than 10 production defects at launch.',
-      'Architected and delivered a React/TypeScript Account Opening Portal that digitized advisor onboarding workflows.',
-      'Engineered Node.js REST APIs for account-type-based dynamic form data retrieval.',
-      'Coordinated delivery across a 5-member engineering team through sprint planning and retrospectives.',
+      "Owned two applications in the FinTech domain in React and TypeScript, lifting user engagement and reliability.",
+      "Developed an Account Opening Portal for financial advisors, to cut down the turn-around time for opening demat accounts.",
+      "Delivered a Stock Locate Portal to help users keep track of rise and fall of stock prices, and perform trading operations.",
+      "Collaborated with backend developers in the development of services for smoother integration on the frontend",
     ],
   },
   {
@@ -155,10 +152,9 @@ export const experience: ExperienceEntry[] = [
     stack: 'React, JavaScript, React Native',
     period: '06/2019 – 04/2022',
     bullets: [
-      'Engineered and maintained React Native modules for a digital wallet feature in a high-volume UAE-based mobile banking app.',
-      'Successfully delivered 3 consecutive releases of VISA Click to Pay for a UK-based bank.',
-      "Delivered the Virtual Card feature for a UK-based bank, integrating with the Card Management team.",
-      'Resolved production issues in close collaboration with backend engineers for stable, high-volume banking releases.',
+      "Delivered three successful consecutive releases of VISA Click to Pay in React and JavaScript for a UK-based banking service, shipping a faster and seamless payment experience.",
+      "Developed the wallet feature and workflows such as Beneficiaries, Account Status, and Loans using React Native and JavaScript for a UAE mobile banking app used by hundreds of thousands of real customers.",
+      "Resolved defects by teaming up with senior developers to analyse and debug the code.",
     ],
-  },
+  },  
 ]

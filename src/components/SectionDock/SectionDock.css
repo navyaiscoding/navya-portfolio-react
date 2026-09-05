@@ -38,7 +38,7 @@
 
 .dock-tile-icon { width: 1.15rem; height: 1.15rem; }
 .dock-tile-icon svg { width: 100%; height: 100%; stroke: currentColor; }
-.dock-tile-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.01em; }
+.dock-tile-label { font-size: 0.62rem; letter-spacing: 0.01em; }
 
 @media (max-width: 40rem) {
   .dock { bottom: 1rem; width: 90vw; min-width: 0; gap: 0.15rem; padding: 0.35rem; }

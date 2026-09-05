@@ -14,14 +14,13 @@ function SkillCard({ group, index }: SkillCardProps) {
     <div
       className={`skill-card ${className}`}
       ref={ref}
-      style={{ transitionDelay: `${index * 60}ms`, ['--level' as string]: `${group.level}%` }}
+      style={{ transitionDelay: `${index * 60}ms` }}
     >
-      <h3 className="mono">{group.category}</h3>
+      <h3>{group.category}</h3>
       <div className="skill-level">
         <div className="skill-level-track">
           <div className="skill-level-fill" />
         </div>
-        <span className="skill-level-value mono">{group.level}%</span>
       </div>
       <ul className="pill-list">
         {group.items.map((item) => (

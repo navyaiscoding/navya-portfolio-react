@@ -7,13 +7,13 @@ export default function Contact() {
   return (
     <section className="section contact" id="contact" ref={ref}>
       <div className={className}>
-        <p className="mono accent">What's Next?</p>
+        <p className="accent">What's Next?</p>
         <h2>Get In Touch</h2>
         <p className="contact-intro">
           Currently based in Stockholm with full EU work authorization and available immediately.
-          Open to Senior Frontend / Full-Stack roles — reach out and let's talk.
+          Open to Frontend / Full-Stack roles — reach out and let's talk.
         </p>
-        <div className="contact-links mono">
+        <div className="contact-links">
           <a href={`mailto:${profile.email}`}>{profile.email}</a>
           <span>·</span>
           <a href={`tel:${profile.phone.replace(/\s/g, '')}`}>{profile.phone}</a>
