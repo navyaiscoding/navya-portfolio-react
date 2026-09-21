@@ -49,6 +49,15 @@ const DOCK_ITEMS: DockItem[] = [
     ),
   },
   {
+    id: 'projects',
+    label: 'Projects',
+    icon: (
+      <svg {...iconProps}>
+        <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z" />
+      </svg>
+    ),
+  },
+  {
     id: 'experience',
     label: 'Experience',
     icon: (

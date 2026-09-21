@@ -23,6 +23,14 @@ export interface NavSearchItem {
   keywords: string
 }
 
+export interface ProjectEntry {
+  name: string
+  description: string
+  stack: string[]
+  liveUrl?: string
+  repoUrl?: string
+}
+
 export interface ExperienceEntry {
   role: string
   company: string
@@ -101,8 +109,18 @@ export const navSearchItems: NavSearchItem[] = [
   { id: 'about', label: 'About', group: 'Sections', keywords: 'about summary bio' },
   { id: 'competencies', label: 'Core Competencies', group: 'Sections', keywords: 'competencies strengths capabilities' },
   { id: 'skills', label: 'Skills', group: 'Sections', keywords: 'skills tech stack' },
+  { id: 'projects', label: 'Projects', group: 'Sections', keywords: 'projects side projects work portfolio' },
   { id: 'experience', label: 'Experience', group: 'Sections', keywords: 'experience work history jobs' },
   { id: 'contact', label: 'Contact', group: 'Sections', keywords: 'contact email message reach out' },
+]
+
+export const projects: ProjectEntry[] = [
+  {
+    name: 'Celluloid Verdict',
+    description: 'A movie review platform — unsparing, unspooled critiques with ratings and genre tagging for films worth arguing about.',
+    stack: ['Built with Lovable'],
+    liveUrl: 'https://celluloid-verdict.lovable.app/',
+  },
 ]
 
 export const experience: ExperienceEntry[] = [
