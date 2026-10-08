@@ -178,3 +178,90 @@ export function useCoreCompetencies() {
 
   return { competencies, loading, error }
 }
+
+interface SiteStatsResult {
+  views: number
+  likes: number
+  liked: boolean
+  available: boolean
+  toggleLike: () => void
+}
+
+const VIEWED_KEY = 'portfolio:viewed'
+const LIKED_KEY = 'portfolio:liked'
+
+function readFlag(key: string): boolean {
+  try {
+    return window.localStorage.getItem(key) === '1'
+  } catch {
+    return false
+  }
+}
+
+function writeFlag(key: string, on: boolean) {
+  try {
+    if (on) window.localStorage.setItem(key, '1')
+    else window.localStorage.removeItem(key)
+  } catch {
+    // Private mode / storage blocked — the feature just won't remember.
+  }
+}
+
+// Loads view/like counts, counts this browser's visit once, and exposes an
+// optimistic like toggle. `available` is false if the API is unreachable, so
+// the UI can hide itself instead of showing a broken widget.
+export function useSiteStats(): SiteStatsResult {
+  const [views, setViews] = useState(0)
+  const [likes, setLikes] = useState(0)
+  const [liked, setLiked] = useState(() => readFlag(LIKED_KEY))
+  const [available, setAvailable] = useState(false)
+
+  useEffect(() => {
+    let cancelled = false
+
+    const load = async () => {
+      try {
+        if (!readFlag(VIEWED_KEY)) {
+          const res = await fetch('/api/stats/view', { method: 'POST' })
+          if (res.ok) writeFlag(VIEWED_KEY, true)
+        }
+        const res = await fetch('/api/stats')
+        if (!res.ok) throw new Error(`Request failed: ${res.status}`)
+        const data: { views: number; likes: number } = await res.json()
+        if (cancelled) return
+        setViews(data.views)
+        setLikes(data.likes)
+        setAvailable(true)
+      } catch (err) {
+        console.error('Failed to load site stats:', err)
+      }
+    }
+
+    load()
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  const toggleLike = () => {
+    const next = !liked
+    // Optimistic update; roll back if the request fails.
+    setLiked(next)
+    setLikes((n) => Math.max(0, n + (next ? 1 : -1)))
+    writeFlag(LIKED_KEY, next)
+
+    fetch('/api/stats/like', { method: next ? 'POST' : 'DELETE' })
+      .then((res) => {
+        if (!res.ok) throw new Error(`Request failed: ${res.status}`)
+        return res.json()
+      })
+      .then((data: { likes: number }) => setLikes(data.likes))
+      .catch(() => {
+        setLiked(!next)
+        setLikes((n) => Math.max(0, n + (next ? -1 : 1)))
+        writeFlag(LIKED_KEY, !next)
+      })
+  }
+
+  return { views, likes, liked, available, toggleLike }
+}
