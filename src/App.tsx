@@ -7,6 +7,7 @@ import Nav from './components/Nav/Nav'
 import Projects from './components/Projects/Projects'
 import SectionDock from './components/SectionDock/SectionDock'
 import Skills from './components/Skills/Skills'
+import Stats from './components/Stats/Stats'
 import CodeBackground from './components/CodeBackground/CodeBackground'
 import { useTheme } from './hooks'
 import Contact from './components/Contact/Contact'
@@ -26,6 +27,7 @@ export default function App() {
           <Skills />
           <Projects />
           <Experience />
+          <Stats />
           {/* <ContactForm /> */}
           <Contact />
         </main>

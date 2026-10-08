@@ -15,6 +15,7 @@ function getClient(): Redis | null {
 }
 
 const VIEWS_KEY = 'portfolio:views'
+
 const LIKES_KEY = 'portfolio:likes'
 
 export interface SiteStats {
