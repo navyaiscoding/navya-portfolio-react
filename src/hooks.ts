@@ -222,7 +222,7 @@ export function useSiteStats(): SiteStatsResult {
     const load = async () => {
       try {
         if (!readFlag(VIEWED_KEY)) {
-          const res = await fetch('/api/stats/view', { method: 'POST' })
+          const res = await fetch('/api/stats', { method: 'POST' })
           if (res.ok) writeFlag(VIEWED_KEY, true)
         }
         const res = await fetch('/api/stats')
@@ -250,7 +250,7 @@ export function useSiteStats(): SiteStatsResult {
     setLikes((n) => Math.max(0, n + (next ? 1 : -1)))
     writeFlag(LIKED_KEY, next)
 
-    fetch('/api/stats/like', { method: next ? 'POST' : 'DELETE' })
+    fetch('/api/likes', { method: next ? 'POST' : 'DELETE' })
       .then((res) => {
         if (!res.ok) throw new Error(`Request failed: ${res.status}`)
         return res.json()
