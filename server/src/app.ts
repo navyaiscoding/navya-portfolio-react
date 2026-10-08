@@ -6,7 +6,7 @@ import { notFound } from './middleware/notFound.js'
 import { contactRouter } from './routes/contact.routes.js'
 import { healthRouter } from './routes/health.routes.js'
 import { competenciesRouter } from './routes/competencies.routes.js'
-import { statsRouter } from './routes/stats.routes.js'
+import { likesRouter, statsRouter } from './routes/stats.routes.js'
 
 export const app = express()
 
@@ -20,6 +20,7 @@ app.use('/api/health', healthRouter)
 app.use('/api/contact', contactRouter)
 app.use('/api/competencies', competenciesRouter)
 app.use('/api/stats', statsRouter)
+app.use('/api/likes', likesRouter)
 
 // --- Fallbacks -----------------------------------------------------------
 // notFound only runs if no route above matched. errorHandler only runs when
