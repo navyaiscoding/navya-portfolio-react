@@ -1,0 +1,103 @@
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1.25rem;
+  max-width: 38rem;
+  margin-inline: auto;
+}
+
+.stats-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+  padding: 2rem 1.5rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow);
+}
+
+/* Soft gradient washes: accent purple for visitors, rose for likes */
+.stats-card-views {
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--accent) 22%, var(--card)) 0%,
+    var(--card) 70%
+  );
+}
+.stats-card-like {
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, #e11d48 18%, var(--card)) 0%,
+    var(--card) 70%
+  );
+}
+
+.stats-icon {
+  width: 5rem;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-bottom: 0.5rem;
+  padding: 0;
+}
+.stats-icon svg {
+  width: 2.25rem;
+  height: 2.25rem;
+  fill: none;
+}
+
+/* Visitors: accent-colored, not interactive */
+.stats-icon-views {
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+}
+.stats-icon-views svg { stroke: var(--accent); }
+
+/* Like: red heart button */
+.stats-icon-like {
+  background: color-mix(in srgb, #e11d48 10%, transparent);
+  border: 1px solid color-mix(in srgb, #e11d48 35%, transparent);
+  cursor: pointer;
+  transition: transform 0.15s, background 0.2s, border-color 0.2s;
+}
+.stats-icon-like svg { stroke: #e11d48; transition: fill 0.2s; }
+.stats-icon-like:hover {
+  transform: scale(1.06);
+  background: color-mix(in srgb, #e11d48 16%, transparent);
+  border-color: #e11d48;
+}
+.stats-icon-like:active { transform: scale(0.96); }
+.stats-icon-like:focus-visible { outline: 2px solid #e11d48; outline-offset: 3px; }
+.stats-icon-like.liked { border-color: #e11d48; }
+.stats-icon-like.liked svg {
+  fill: #e11d48;
+  animation: heart-pop 0.35s ease-out;
+}
+
+.stats-headline {
+  color: var(--text-bright);
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0;
+}
+.stats-sub {
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+@keyframes heart-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stats-icon-like,
+  .stats-icon-like.liked svg { animation: none; transition: none; }
+}
