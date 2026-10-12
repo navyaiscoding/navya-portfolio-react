@@ -50,7 +50,7 @@ export const roles: string[] = [
 
 export const profile: Profile = {
   name: 'Navya Anumula',
-  title: 'Senior Software Engineer — React, Angular, TypeScript & Node.js',
+  title: 'Full Stack Developer — React, Angular, TypeScript & Node.js',
   location: 'Stockholm, Sweden',
   availability: 'Full EU Work Authorization · Available Immediately',
   email: 'navyaanumula@gmail.com',
@@ -58,7 +58,7 @@ export const profile: Profile = {
   linkedin: 'https://www.linkedin.com/in/navya-anumula-frontend-engineer/',
   linkedinUrl: 'https://www.linkedin.com/in/navya-anumula-frontend-engineer/',
   summary:
-    'Senior Frontend Engineer with 7 years of experience building production web and mobile applications in React, Angular, TypeScript, and React Native across banking, financial services, healthcare, and e-commerce. Skilled in frontend architecture, performance and SEO optimization, and REST API integration, with a track record of defining frontend development standards, mentoring engineers, and leading Agile delivery from sprint planning through retrospectives.',
+    'Full Stack Developer with 7 years of experience building production web and mobile applications in React, Angular, TypeScript, and React Native across banking, financial services, healthcare, and e-commerce. Skilled in frontend architecture, performance and SEO optimization, and REST API integration, with a track record of defining frontend development standards, mentoring engineers, and leading Agile delivery from sprint planning through retrospectives.',
   bio: [
     "Give me a codebase I've never seen, a language I haven't touched, or a problem nobody's solved yet, and my first move is never to ask for a ramp-up plan. It's to always start reading, start testing, and start building.", 
       "For close to 7 years, that instinct is what's mattered more than any single tool: picking up whatever a project actually needed, usually within days, and shipping something real rather than waiting to be fully comfortable first. I have set frontend architecture on complex platforms, led teams to take business problems from idea to release with full ownership, mentored junior engineers through code review, and treat Gen AI- assisted development as a daily part of the workflow rather than a novelty.",
