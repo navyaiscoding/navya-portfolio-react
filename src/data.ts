@@ -55,8 +55,8 @@ export const profile: Profile = {
   availability: 'Full EU Work Authorization · Available Immediately',
   email: 'navyaanumula@gmail.com',
   phone: '+46 72 774 4915',
-  linkedin: 'https://www.linkedin.com/in/navya-anumula-frontend-engineer/',
-  linkedinUrl: 'https://www.linkedin.com/in/navya-anumula-frontend-engineer/',
+  linkedin: 'https://www.linkedin.com/in/navya-anumula-fullstack-developer/',
+  linkedinUrl: 'https://www.linkedin.com/in/navya-anumula-fullstack-developer/',
   summary:
     'Full Stack Developer with 7 years of experience building production web and mobile applications in React, Angular, TypeScript, and React Native across banking, financial services, healthcare, and e-commerce. Skilled in frontend architecture, performance and SEO optimization, and REST API integration, with a track record of defining frontend development standards, mentoring engineers, and leading Agile delivery from sprint planning through retrospectives.',
   bio: [
