@@ -55,8 +55,8 @@ export const profile: Profile = {
   availability: 'Full EU Work Authorization · Available Immediately',
   email: 'navyaanumula@gmail.com',
   phone: '+46 72 774 4915',
-  linkedin: 'https://www.linkedin.com/in/navya-anumula-fullstack-developer/',
-  linkedinUrl: 'https://www.linkedin.com/in/navya-anumula-fullstack-developer/',
+  linkedin: 'https://www.linkedin.com/in/navya-anumula-frontend-engineer/',
+  linkedinUrl: 'https://www.linkedin.com/in/navya-anumula-frontend-engineer/',
   summary:
     'Full Stack Developer with 7 years of experience building production web and mobile applications in React, Angular, TypeScript, and React Native across banking, financial services, healthcare, and e-commerce. Skilled in frontend architecture, performance and SEO optimization, and REST API integration, with a track record of defining frontend development standards, mentoring engineers, and leading Agile delivery from sprint planning through retrospectives.',
   bio: [
@@ -89,7 +89,7 @@ export const skills: SkillGroup[] = [
   },
   {
     category: 'AI-Assisted Development',
-    items: ['GitHub Copilot', 'Cursor', 'Claude'],
+    items: ['GitHub Copilot', 'Cursor', 'Claude', 'Codex', 'Lovable'],
   },
 ]
 
@@ -116,10 +116,10 @@ export const navSearchItems: NavSearchItem[] = [
 
 export const projects: ProjectEntry[] = [
   {
-    name: 'Celluloid Verdict',
-    description: 'A movie review platform — unsparing, unspooled critiques with ratings and genre tagging for films worth arguing about.',
-    stack: ['Built with Lovable'],
-    liveUrl: 'https://celluloid-verdict.lovable.app/',
+    name: 'ReRitam',
+    description: 'A gentle wellness companion for building daily rhythm — set your own reminders, track habits, and get a weekly AI insight. Built and shipped in under 72 hours for Lovable SheBuilds Season 04, where around 800 of roughly 3,300 applicants were accepted, and shaped by a survey of women.',
+    stack: ['Lovable SheBuilds S04', 'Built with Lovable'],
+    liveUrl: 'https://reritam-wellness.lovable.app/',
   },
 ]
 

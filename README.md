@@ -119,7 +119,7 @@ src/
 ## Contact
 
 - Email: navyaanumula@gmail.com
-- LinkedIn: [linkedin.com/in/navya-anumula-frontend-engineer](https://www.linkedin.com/in/navya-anumula-fullstack-developer/)
+- LinkedIn: [linkedin.com/in/navya-anumula-frontend-engineer](https://www.linkedin.com/in/navya-anumula-frontend-engineer/)
 
 ## License
 

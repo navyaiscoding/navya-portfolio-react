@@ -16,6 +16,7 @@ const DEVICON = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons'
 // default — matches the `invert: true` treatment used for other
 // monochrome logos below (GitHub, Next.js) so it stays visible in dark mode.
 const SIMPLEICONS = 'https://cdn.simpleicons.org'
+const LOBEHUB = 'https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg@latest/icons'
 
 export const skillIcons: Record<string, SkillIcon> = {
   React: { src: `${DEVICON}/react/react-original.svg` },
@@ -47,4 +48,8 @@ export const skillIcons: Record<string, SkillIcon> = {
   'GitHub Copilot': { src: `${SIMPLEICONS}/githubcopilot`, invert: true },
   Cursor: { src: `${SIMPLEICONS}/cursor`, invert: true },
   Claude: { src: `${SIMPLEICONS}/claude`, invert: true },
+  // Simple Icons has no Codex or Lovable logo (both slugs 404), so these come
+  // from LobeHub's icon set. The "-color" variants are full-color, so no invert.
+  Codex: { src: `${LOBEHUB}/codex-color.svg` },
+  Lovable: { src: `${LOBEHUB}/lovable-color.svg` },
 }
