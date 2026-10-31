@@ -49,8 +49,12 @@ export interface ExperienceEntry {
 }
 
 export const roles: string[] = [
+  'Full Stack Developer',
   'React Developer',
   'Angular Developer',
+  'Node.js Developer',
+  'GenAI Developer',
+  'Full Stack Engineer',
   'TypeScript Engineer',
   'Frontend Architect',
   'Web Developer',
@@ -59,7 +63,7 @@ export const roles: string[] = [
 
 export const profile: Profile = {
   name: 'Navya Anumula',
-  title: 'Full Stack Developer — React, Angular, TypeScript & Node.js',
+  title: 'Full Stack Developer — React, Angular, TypeScript, Node.js & GenAI',
   location: 'Stockholm, Sweden',
   availability: 'Full EU Work Authorization · Available Immediately',
   email: 'navyaanumula@gmail.com',

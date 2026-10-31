@@ -10,6 +10,16 @@ export const statsRateLimiter = rateLimit({
   message: { error: 'Too many requests — please slow down.' },
 })
 
+// Every chat message triggers a paid LLM call, so cap it per IP: 20 messages
+// per 15 minutes is plenty for a recruiter, but stops a script from running up the bill.
+export const chatRateLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 20,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'You have asked a lot of questions. Please try again in a few minutes or email me directly.' },
+})
+
 // Caps abuse of the public contact endpoint: 5 submissions per IP per 15
 // minutes. Rate limiting is a standard concern for any endpoint that's
 // unauthenticated and triggers a side effect (here: sending an email).

@@ -3,6 +3,7 @@ import express from 'express'
 import { config } from './config/env.js'
 import { errorHandler } from './middleware/errorHandler.js'
 import { notFound } from './middleware/notFound.js'
+import { chatRouter } from './routes/chat.routes.js'
 import { contactRouter } from './routes/contact.routes.js'
 import { healthRouter } from './routes/health.routes.js'
 import { competenciesRouter } from './routes/competencies.routes.js'
@@ -21,6 +22,7 @@ app.use('/api/contact', contactRouter)
 app.use('/api/competencies', competenciesRouter)
 app.use('/api/stats', statsRouter)
 app.use('/api/likes', likesRouter)
+app.use('/api/chat', chatRouter)
 
 // --- Fallbacks -----------------------------------------------------------
 // notFound only runs if no route above matched. errorHandler only runs when

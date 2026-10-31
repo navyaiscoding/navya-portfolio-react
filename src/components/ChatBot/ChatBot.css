@@ -1,0 +1,154 @@
+.chat-fab {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 70;
+  width: 3.25rem;
+  height: 3.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  background: var(--card);
+  color: var(--accent);
+  cursor: pointer;
+  box-shadow: var(--shadow-lg);
+  transition: transform 0.15s, background 0.2s, color 0.2s;
+}
+.chat-fab svg { width: 1.5rem; height: 1.5rem; stroke: currentColor; fill: none; }
+.chat-fab:hover { transform: scale(1.06); background: var(--accent); color: var(--bg); }
+.chat-fab:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.chat-panel {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 5.5rem;
+  z-index: 70;
+  width: min(23rem, calc(100vw - 2rem));
+  height: min(32rem, 70vh);
+  display: flex;
+  flex-direction: column;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--accent) 8%, var(--card));
+}
+.chat-title { margin: 0; color: var(--text-bright); font-size: 0.95rem; font-weight: 600; }
+.chat-subtitle { margin: 0.125rem 0 0; color: var(--muted); font-size: 0.75rem; }
+.chat-close {
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  display: flex;
+}
+.chat-close svg { width: 1.1rem; height: 1.1rem; stroke: currentColor; fill: none; }
+.chat-close:hover { color: var(--text-bright); }
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+.chat-welcome p { margin: 0 0 0.75rem; color: var(--text); font-size: 0.875rem; line-height: 1.5; }
+.chat-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.chat-chip {
+  font-family: inherit;
+  font-size: 0.78rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--bg-alt);
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+.chat-chip:hover { border-color: var(--accent); color: var(--accent); }
+
+.chat-msg {
+  max-width: 85%;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.chat-msg.user {
+  align-self: flex-end;
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: var(--text-bright);
+  border-bottom-right-radius: 0.25rem;
+}
+.chat-msg.assistant {
+  align-self: flex-start;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-bottom-left-radius: 0.25rem;
+}
+.chat-typing { color: var(--muted); font-style: italic; }
+.chat-error {
+  align-self: stretch;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--muted);
+  border: 1px dashed var(--border);
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+}
+
+.chat-form {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border-top: 1px solid var(--border);
+}
+.chat-form input {
+  flex: 1;
+  min-width: 0;
+  font-family: inherit;
+  font-size: 0.875rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  background: var(--bg-alt);
+  color: var(--text-bright);
+}
+.chat-form input:focus { outline: none; border-color: var(--accent); }
+.chat-form button {
+  width: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--bg);
+  cursor: pointer;
+}
+.chat-form button:disabled { opacity: 0.45; cursor: not-allowed; }
+.chat-form button svg { width: 1.1rem; height: 1.1rem; stroke: currentColor; fill: none; }
+
+/* On phones the section dock fills the bottom edge, so lift the bubble and panel above it. */
+@media (max-width: 720px) {
+  .chat-fab { right: 1rem; bottom: 5rem; }
+  .chat-panel { right: 1rem; left: 1rem; width: auto; bottom: 8.5rem; height: min(28rem, 60vh); }
+}

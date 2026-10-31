@@ -1,5 +1,6 @@
 import About from './components/About/About'
 import Certifications from './components/Certifications/Certifications'
+import ChatBot from './components/ChatBot/ChatBot'
 import CoreCompetencies from './components/CoreCompetencies/CoreCompetencies'
 import Experience from './components/Experience/Experience'
 import Footer from './components/Footer/Footer'
@@ -36,6 +37,7 @@ export default function App() {
         <Footer />
       </div>
       <SectionDock />
+      <ChatBot />
     </>
   )
 }

@@ -12,6 +12,12 @@ export const config = {
     user: process.env.SMTP_USER ?? '',
     pass: process.env.SMTP_PASS ?? '',
   },
+  // Powers the "ask about Navya" chat bot. Without a key the endpoint answers 503
+  // and the frontend hides the chat bubble.
+  anthropic: {
+    apiKey: process.env.ANTHROPIC_API_KEY ?? '',
+    model: process.env.CHAT_MODEL ?? 'claude-haiku-5-5',
+  },
   isProduction: process.env.NODE_ENV === 'production',
 }
 
