@@ -69,6 +69,16 @@ const DOCK_ITEMS: DockItem[] = [
     ),
   },
   {
+    id: 'certifications',
+    label: 'Certifications',
+    icon: (
+      <svg {...iconProps}>
+        <circle cx="12" cy="9" r="6" />
+        <path d="m8.5 14.5-1.5 7 5-2.5 5 2.5-1.5-7" />
+      </svg>
+    ),
+  },
+  {
     id: 'contact',
     label: 'Contact',
     icon: (

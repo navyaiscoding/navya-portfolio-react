@@ -31,6 +31,15 @@ export interface ProjectEntry {
   repoUrl?: string
 }
 
+export interface CertificationEntry {
+  name: string
+  issuer: string
+  issued: string
+  credentialUrl?: string
+  // Logo shown in the card's badge; falls back to a generic ribbon if omitted or it fails to load.
+  iconUrl?: string
+}
+
 export interface ExperienceEntry {
   role: string
   company: string
@@ -111,6 +120,7 @@ export const navSearchItems: NavSearchItem[] = [
   { id: 'skills', label: 'Skills', group: 'Sections', keywords: 'skills tech stack' },
   { id: 'projects', label: 'Projects', group: 'Sections', keywords: 'projects side projects work portfolio' },
   { id: 'experience', label: 'Experience', group: 'Sections', keywords: 'experience work history jobs' },
+  { id: 'certifications', label: 'Certifications', group: 'Sections', keywords: 'certifications certificates badges courses credentials' },
   { id: 'contact', label: 'Contact', group: 'Sections', keywords: 'contact email message reach out' },
 ]
 
@@ -123,56 +133,76 @@ export const projects: ProjectEntry[] = [
   },
 ]
 
+export const certifications: CertificationEntry[] = [
+  {
+    name: 'Claude Code in action',
+    issuer: 'Claude Academy · Anthropic',
+    issued: 'October 2026',
+    credentialUrl: 'https://academy.claude.com/verify/db1b7cbd8fce8c4422f6b13aa7f0a132',
+    iconUrl: 'https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg@latest/icons/claude-color.svg',
+  },
+  {
+    name: 'Vibe Coding with Lovable: From Idea to Prototype in Under an Hour',
+    issuer: 'LinkedIn Learning',
+    issued: 'October 2026',
+    credentialUrl: 'https://www.linkedin.com/learning/certificates/3635ee69388cde195c04fe55948750efe99f987be923aa697eee5c0fa1f64c12',
+    iconUrl: 'https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg@latest/icons/lovable-color.svg',
+  },
+]
+
 export const experience: ExperienceEntry[] = [
   {
     role: 'Software Engineer',
     company: 'Deloitte',
-    stack: 'React, Angular, Next.js, TypeScript, GenAI',
+    stack: 'Angular 19, React, Next.js, TypeScript, Node.js, GenAI, MCP, Cypress, Playwright',
     period: '11/2024 – 02/2026',
     bullets: [
-        "Delivered two e-commerce applications built on React, Next.js and TypeScript on the frontend and Node.js on the backend, from scratch, promoting coding standards and engineering best practices.",
-        "Standardised the frontend and documentation for a monorepo architecture, building a shared library for reusable UI components using Storybook, used across teams.",
-        "Developed end-to-end features analysing business requirements through stakeholder communication, product design, setting up automated pipelines for deployment, and building APIs.",
-        "Actively participated in Agile sprint planning and retrospectives to ensure proper estimation and assignment of stories, as well as work on stakeholder feedback.",
-        "Ensured interface accessibility in accordance with WCAG standards, implementing ARIA labeling and conducting screen-reader testing.",
-        "Integrated the Figma MCP server into Cursor to generate UI directly from designs using GenAI, speeding up implementation.",
-      ],
+      "Delivered two e-commerce applications from scratch in TypeScript end to end: React and Next.js on the frontend and a Node.js Backend for Frontend (BFF) layer aggregating downstream APIs, promoting coding standards and engineering best practices.",
+      "Delivered two consecutive Angular 19 releases for a US-based healthcare digital platform.",
+      "Integrated the Figma MCP server into Cursor as an MCP connector to generate UI directly from designs using GenAI, alongside GitHub Copilot and Claude, automating repetitive implementation work.",
+      "Standardised the frontend and developer-friendly documentation for a micro frontend architecture, building a shared library of reusable UI components with Storybook, used across teams.",
+      "Developed end-to-end features analysing business requirements through stakeholder communication, product design, setting up automated pipelines for deployment, and building APIs.",
+      "Wrote end-to-end tests with Cypress and Playwright alongside unit and component testing, to catch regressions before release.",
+      "Actively participated in Agile sprint planning and retrospectives to ensure proper estimation and assignment of stories, as well as work on stakeholder feedback.",
+      "Mentored junior developers through pair programming, feedback and knowledge sharing, reducing defects towards the release.",
+    ],
   },
   {
     role: 'Senior Frontend Developer',
     company: 'Infosys',
-    stack: 'React, TypeScript, Node.js, GraphQL',
+    stack: 'React, TypeScript, GraphQL, .NET/C# REST APIs',
     period: '07/2023 – 11/2024',
     bullets: [
-      "Migrated a legacy platform to React.js and TypeScript, leading a team of developers from ground-up to release through evolving requirements.",
-        "Architected and developed the Node.js APIs in the initial phase of app development, contributing to technical decisions to keep the system maintainable and scalable as it grew.",
-        "Integrated frontend applications with REST & GraphQL APIs alongside backend services.",
-        "Mentored junior developers through pair programming and feedback, reducing defects towards the release.",
-        "Set up CI/CD pipelines using GitHub to automate deployments, cutting down manual release effort.",
-        "Improved test coverage and resolved production defects, leading peer code reviews and mentoring engineers along the way by promoting coding standards and engineering best practices",
-      ],
+      "Led a team of 4-5 developers to take a business problem from idea to release with full ownership, migrating an existing platform to React.js and TypeScript and building a Service Request Platform with role-based, SSO-authenticated, asynchronous approval workflows.",
+      "Architected and developed the platform's .NET/C# REST APIs in the initial phase, designing resource models and API contracts for service requests, approvals and role-based access, and contributing to technical decisions to keep the system maintainable and scalable as it grew.",
+      "Built and versioned the API layer behind the approval workflows with request validation, consistent error handling and SSO-authenticated access, and documented the endpoints so frontend and backend developers could integrate against them independently.",
+      "Set up CI/CD pipelines with GitHub Actions to automate deployments, cutting down manual release effort.",
+      "Continuously improved test coverage and code quality with Jest, resolving production defects and leading peer code reviews.",
+    ],
   },
   {
     role: 'Senior Systems Engineer',
     company: 'Infosys',
-    stack: 'React, TypeScript, Node.js',
+    stack: 'React, TypeScript, .NET/C# REST APIs, SQL',
     period: '05/2022 – 06/2023',
     bullets: [
-      "Owned two applications in the FinTech domain in React and TypeScript, lifting user engagement and reliability.",
-      "Developed an Account Opening Portal for financial advisors, to cut down the turn-around time for opening demat accounts.",
-      "Delivered a Stock Locate Portal to help users keep track of rise and fall of stock prices, and perform trading operations.",
-      "Collaborated with backend developers in the development of services for smoother integration on the frontend",
+      "Owned and maintained two applications in the FinTech domain in React and TypeScript, lifting user engagement and reliability.",
+      "Engineered .NET/C# REST APIs with JWT/OAuth-based authentication backed by large relational databases for account-type-based data retrieval, keeping frontend-backend integration clean as the system scaled.",
+      "Designed and optimised data-retrieval endpoints for the Account Opening and Stock Locate portals (query shaping, pagination and response contracts) and covered them with automated tests with Jest ahead of release.",
+      "Built an Account Opening Portal for financial advisors, cutting account-opening turnaround time for external users.",
+      "Delivered a Stock Locate Portal to help users track the rise and fall of stock prices and perform trading operations.",
     ],
   },
   {
     role: 'Project Engineer',
     company: 'Wipro',
-    stack: 'React, JavaScript, React Native',
+    stack: 'React, Redux, JavaScript, React Native, SAST, DAST, Nexus',
     period: '06/2019 – 04/2022',
     bullets: [
-      "Delivered three successful consecutive releases of VISA Click to Pay in React and JavaScript for a UK-based banking service, shipping a faster and seamless payment experience.",
-      "Developed the wallet feature and workflows such as Beneficiaries, Account Status, and Loans using React Native and JavaScript for a UAE mobile banking app used by hundreds of thousands of real customers.",
-      "Resolved defects by teaming up with senior developers to analyse and debug the code.",
+      "Delivered three consecutive releases of VISA Click to Pay in React, Redux and JavaScript for a UK-based banking service, integrating with external payment APIs and async payment flows under strict security and compliance requirements, and shipping a faster, seamless checkout experience to external users.",
+      "Built and maintained the wallet feature and banking workflows (Beneficiaries, Account Status, Loans and User Registration) in React Native and Redux for a UAE mobile banking app serving hundreds of thousands of external users, integrating with core banking services over REST APIs.",
+      "Worked with SAST, DAST and Nexus scans as part of secure release practices for regulated banking releases.",
+      "Resolved production defects by pairing with senior developers to analyse and debug issues across the frontend and API integration layers, tightening the feedback loop between releases.",
     ],
-  },  
+  },
 ]

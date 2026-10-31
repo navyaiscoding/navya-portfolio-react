@@ -1,4 +1,5 @@
 import About from './components/About/About'
+import Certifications from './components/Certifications/Certifications'
 import CoreCompetencies from './components/CoreCompetencies/CoreCompetencies'
 import Experience from './components/Experience/Experience'
 import Footer from './components/Footer/Footer'
@@ -27,6 +28,7 @@ export default function App() {
           <Skills />
           <Projects />
           <Experience />
+          <Certifications />
           <Stats />
           {/* <ContactForm /> */}
           <Contact />
