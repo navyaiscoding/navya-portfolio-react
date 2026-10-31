@@ -94,7 +94,7 @@ export const skills: SkillGroup[] = [
   },
   {
     category: 'Backend & APIs',
-    items: ['Node.js', 'GraphQL', 'PostgreSQL'],
+    items: ['Node.js', '.NET', 'GraphQL', 'PostgreSQL'],
   },
   {
     category: 'AI-Assisted Development',

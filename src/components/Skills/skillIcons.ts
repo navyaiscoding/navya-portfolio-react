@@ -40,6 +40,7 @@ export const skillIcons: Record<string, SkillIcon> = {
   Vite: { src: `${DEVICON}/vitejs/vitejs-original.svg` },
   Figma: { src: `${DEVICON}/figma/figma-original.svg` },
   'Node.js': { src: `${DEVICON}/nodejs/nodejs-original.svg` },
+  '.NET': { src: `${DEVICON}/dot-net/dot-net-original.svg` },
   GraphQL: { src: `${DEVICON}/graphql/graphql-plain.svg` },
   PostgreSQL: { src: `${DEVICON}/postgresql/postgresql-original.svg` },
   // Best-guess slugs for newer AI tooling — couldn't verify these resolve
