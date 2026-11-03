@@ -51,6 +51,12 @@ export const skillIcons: Record<string, SkillIcon> = {
   Claude: { src: `${SIMPLEICONS}/claude`, invert: true },
   // Simple Icons has no Codex or Lovable logo (both slugs 404), so these come
   // from LobeHub's icon set. The "-color" variants are full-color, so no invert.
+  // Used by the Experience section's tech stacks.
+  'Claude Code': { src: `${LOBEHUB}/claudecode-color.svg` },
+  MCP: { src: `${LOBEHUB}/mcp.svg`, invert: true },
+  LangGraph: { src: `${LOBEHUB}/langgraph-color.svg` },
+  'C#': { src: `${DEVICON}/csharp/csharp-original.svg` },
+  JavaScript: { src: `${DEVICON}/javascript/javascript-original.svg` },
   Codex: { src: `${LOBEHUB}/codex-color.svg` },
   Lovable: { src: `${LOBEHUB}/lovable-color.svg` },
 }

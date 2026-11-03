@@ -24,10 +24,10 @@ export default function App() {
         <main>
           <Hero />
           <About />
-          <CoreCompetencies />
           <Skills />
-          <Projects />
           <Experience />
+          <Projects />
+          <CoreCompetencies />
           <Certifications />
           <Stats />
           {/* <ContactForm /> */}

@@ -1,66 +1,36 @@
 import type { CSSProperties } from 'react'
-import { skills, type SkillGroup } from '../../data'
+import { skills } from '../../data'
 import { useReveal } from '../../hooks'
 import SectionHeading from '../SectionHeading/SectionHeading'
-import { categoryColors, defaultCategoryColor, getInitials } from './categoryColors'
-import { skillIcons } from './skillIcons'
+import { categoryColors, defaultCategoryColor } from './categoryColors'
+import SkillIcon from './SkillIcon'
 import './Skills.css'
 
-interface SkillCategoryProps {
-  group: SkillGroup
-  index: number
+// Flatten every category into one list, remembering each skill's category colour.
+const tickerItems = skills.flatMap((group) =>
+  group.items.map((name) => ({
+    name,
+    color: categoryColors[group.category] ?? defaultCategoryColor,
+  })),
+)
+
+// ~2s per logo keeps the scroll speed steady however many skills there are.
+const durationSeconds = tickerItems.length * 2
+
+interface TickerRowProps {
+  // The second copy exists only to make the loop seamless; hide it from screen readers.
+  duplicate?: boolean
 }
 
-function SkillCategory({ group, index }: SkillCategoryProps) {
-  const { ref, className } = useReveal<HTMLDivElement>()
-  const color = categoryColors[group.category] ?? defaultCategoryColor
-
+function TickerRow({ duplicate }: TickerRowProps) {
   return (
-    <div
-      className={`skill-category ${className}`}
-      ref={ref}
-      style={{ '--cat-color': color, transitionDelay: `${index * 60}ms` } as CSSProperties}
-    >
-      <div className="skill-category-header">
-        <span className="skill-category-dot" />
-        <span className="skill-category-title">{group.category}</span>
-        <span className="skill-category-line" />
-      </div>
-      <div className="skill-icons-row">
-        {group.items.map((item, i) => {
-          const icon = skillIcons[item]
-          return (
-            <div
-              className="skill-icon-item"
-              key={item}
-              style={i % 2 === 0 ? { transform: 'translateY(-0.125rem)' } : undefined}
-            >
-              <span className="skill-icon-badge">
-                {icon ? (
-                  <img
-                    src={icon.src}
-                    alt=""
-                    className={icon.invert ? 'skill-icon-invert' : ''}
-                    loading="lazy"
-                    // Some devicon paths change over time — fall back to
-                    // initials instead of showing a broken image icon.
-                    onError={(e) => {
-                      const img = e.currentTarget
-                      img.style.display = 'none'
-                      img.nextElementSibling?.classList.remove('hidden')
-                    }}
-                  />
-                ) : null}
-                <span className={`skill-icon-initials ${icon ? 'hidden' : ''}`}>
-                  {getInitials(item)}
-                </span>
-              </span>
-              <span className="skill-icon-label">{item}</span>
-            </div>
-          )
-        })}
-      </div>
-    </div>
+    <ul className={`skills-set ${duplicate ? 'skills-set-copy' : ''}`} aria-hidden={duplicate || undefined}>
+      {tickerItems.map(({ name, color }, i) => (
+        <li key={name} style={{ '--cat-color': color } as CSSProperties}>
+          <SkillIcon name={name} raised={i % 2 === 0} labelOnHover />
+        </li>
+      ))}
+    </ul>
   )
 }
 
@@ -71,9 +41,24 @@ export default function Skills() {
       <div className={className}>
         <SectionHeading title="Skills" />
         <div className="skills-wall">
-          {skills.map((group, i) => (
-            <SkillCategory group={group} index={i} key={group.category} />
-          ))}
+          {/* Two identical sets side by side, translated by -50% in a loop. */}
+          <div className="skills-ticker">
+            <div className="skills-track" style={{ animationDuration: `${durationSeconds}s` }}>
+              <TickerRow />
+              <TickerRow duplicate />
+            </div>
+          </div>
+          <ul className="skills-legend" aria-label="Skill categories">
+            {skills.map((group) => (
+              <li key={group.category}>
+                <span
+                  className="skills-legend-dot"
+                  style={{ background: categoryColors[group.category] ?? defaultCategoryColor }}
+                />
+                {group.category}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

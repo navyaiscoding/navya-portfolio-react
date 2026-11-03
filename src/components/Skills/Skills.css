@@ -4,37 +4,7 @@
   border-radius: 0.875rem;
   padding: 1.5rem;
   box-shadow: var(--shadow);
-  display: flex;
-  flex-direction: column;
-  gap: 1.375rem;
-}
-
-.skill-category:last-child { margin-bottom: 0; }
-
-.skill-category-header {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.875rem;
-}
-.skill-category-dot {
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 50%;
-  background: var(--cat-color);
-  flex-shrink: 0;
-}
-.skill-category-title {
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--text-bright);
-}
-.skill-category-line {
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, var(--border), transparent);
+  overflow: hidden;
 }
 
 .skill-icons-row {
@@ -88,4 +58,82 @@
   color: var(--muted);
   text-align: center;
   line-height: 1.25;
+}
+
+/* --- Scrolling ticker --------------------------------------------------- */
+.skills-ticker {
+  position: relative;
+  overflow: hidden;
+  /* room for the hover label under each badge and the raised tiles above */
+  padding: 0.5rem 0 1.5rem;
+}
+/* Edge fades blend the logos into the card background */
+.skills-ticker::before,
+.skills-ticker::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 3rem;
+  z-index: 2;
+  pointer-events: none;
+}
+.skills-ticker::before { left: 0; background: linear-gradient(90deg, var(--card), transparent); }
+.skills-ticker::after { right: 0; background: linear-gradient(270deg, var(--card), transparent); }
+
+.skills-track {
+  display: flex;
+  width: max-content;
+  animation: skills-scroll linear infinite;
+}
+.skills-ticker:hover .skills-track { animation-play-state: paused; }
+
+.skills-set {
+  display: flex;
+  gap: 1.125rem;
+  padding-right: 1.125rem; /* equals the gap, so the loop seam has no jump */
+  margin: 0;
+  list-style: none;
+}
+@keyframes skills-scroll {
+  to { transform: translateX(-50%); }
+}
+
+/* Logo-only tiles: the name shows on hover under the badge */
+.skill-icon-item.label-on-hover { position: relative; }
+.skill-icon-item.label-on-hover .skill-icon-label {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-top: 0.25rem;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translate(-50%, -0.25rem);
+  transition: opacity 0.2s, transform 0.2s;
+  pointer-events: none;
+}
+.skill-icon-item.label-on-hover:hover .skill-icon-label { opacity: 1; transform: translate(-50%, 0); color: var(--text-bright); }
+
+/* Category colour key */
+.skills-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 1.25rem;
+  margin: 0.25rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+.skills-legend li { display: inline-flex; align-items: center; gap: 0.4rem; }
+.skills-legend-dot { width: 0.5rem; height: 0.5rem; border-radius: 50%; flex-shrink: 0; }
+
+/* Reduced motion: no scrolling; show the logos as a wrapped grid instead */
+@media (prefers-reduced-motion: reduce) {
+  .skills-ticker::before,
+  .skills-ticker::after { display: none; }
+  .skills-track { animation: none; width: auto; }
+  .skills-set { flex-wrap: wrap; justify-content: center; padding-right: 0; }
+  .skills-set-copy { display: none; }
 }

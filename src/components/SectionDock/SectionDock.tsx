@@ -27,24 +27,23 @@ const DOCK_ITEMS: DockItem[] = [
     ),
   },
   {
-    id: 'competencies',
-    label: 'Competencies',
-    icon: (
-      <svg {...iconProps}>
-        <rect x="3" y="3" width="7" height="7" rx="1.5" />
-        <rect x="14" y="3" width="7" height="7" rx="1.5" />
-        <rect x="3" y="14" width="7" height="7" rx="1.5" />
-        <rect x="14" y="14" width="7" height="7" rx="1.5" />
-      </svg>
-    ),
-  },
-  {
     id: 'skills',
     label: 'Skills',
     icon: (
       <svg {...iconProps}>
         <path d="M9 8 4 12l5 4" />
         <path d="M15 8l5 4-5 4" />
+      </svg>
+    ),
+  },
+  {
+    id: 'experience',
+    label: 'Experience',
+    icon: (
+      <svg {...iconProps}>
+        <rect x="3" y="7" width="18" height="13" rx="2" />
+        <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+        <path d="M3 12h18" />
       </svg>
     ),
   },
@@ -58,13 +57,14 @@ const DOCK_ITEMS: DockItem[] = [
     ),
   },
   {
-    id: 'experience',
-    label: 'Experience',
+    id: 'competencies',
+    label: 'Competencies',
     icon: (
       <svg {...iconProps}>
-        <rect x="3" y="7" width="18" height="13" rx="2" />
-        <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-        <path d="M3 12h18" />
+        <rect x="3" y="3" width="7" height="7" rx="1.5" />
+        <rect x="14" y="3" width="7" height="7" rx="1.5" />
+        <rect x="3" y="14" width="7" height="7" rx="1.5" />
+        <rect x="14" y="14" width="7" height="7" rx="1.5" />
       </svg>
     ),
   },

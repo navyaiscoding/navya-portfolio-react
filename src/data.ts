@@ -40,12 +40,21 @@ export interface CertificationEntry {
   iconUrl?: string
 }
 
-export interface ExperienceEntry {
+export interface ExperienceRole {
   role: string
-  company: string
-  stack: string
   period: string
-  bullets: string[]
+  // Short key facts shown as chips above the description
+  highlights: string[]
+  // Tech tiles (labels must match skillIcons.ts; unknown ones show initials)
+  stack: string[]
+  paragraphs: string[]
+}
+
+// One employer. Several roles at the same company (e.g. a promotion) live in
+// `roles`, newest first, and render as a mini timeline under that company's step.
+export interface ExperienceEntry {
+  company: string
+  roles: ExperienceRole[]
 }
 
 export const roles: string[] = [
@@ -152,57 +161,59 @@ export const certifications: CertificationEntry[] = [
 
 export const experience: ExperienceEntry[] = [
   {
-    role: 'Software Engineer',
     company: 'Deloitte',
-    stack: 'Angular 19, React, Next.js, TypeScript, Node.js, GenAI, MCP, Cypress, Playwright',
-    period: '11/2024 – 02/2026',
-    bullets: [
-      "Delivered two e-commerce applications from scratch in TypeScript end to end: React and Next.js on the frontend and a Node.js Backend for Frontend (BFF) layer aggregating downstream APIs, promoting coding standards and engineering best practices.",
-      "Delivered two consecutive Angular 19 releases for a US-based healthcare digital platform.",
-      "Integrated the Figma MCP server into Cursor as an MCP connector to generate UI directly from designs using GenAI, alongside GitHub Copilot and Claude, automating repetitive implementation work.",
-      "Standardised the frontend and developer-friendly documentation for a micro frontend architecture, building a shared library of reusable UI components with Storybook, used across teams.",
-      "Developed end-to-end features analysing business requirements through stakeholder communication, product design, setting up automated pipelines for deployment, and building APIs.",
-      "Wrote end-to-end tests with Cypress and Playwright alongside unit and component testing, to catch regressions before release.",
-      "Actively participated in Agile sprint planning and retrospectives to ensure proper estimation and assignment of stories, as well as work on stakeholder feedback.",
-      "Mentored junior developers through pair programming, feedback and knowledge sharing, reducing defects towards the release.",
+    roles: [
+      {
+        role: 'Software Engineer',
+        period: '11/2024 – 02/2026',
+        highlights: ['GenAI', 'BFF architecture', 'MCP servers', 'LangGraph agents', 'Claude Code workflows'],
+        stack: ['React', 'Next.js', 'TypeScript', 'Node.js', 'MCP', 'LangGraph', 'Claude Code', 'GenAI'],
+        paragraphs: [
+          "I architected and delivered a scalable e-commerce platform using a Backend-for-Frontend (BFF) architecture with Next.js and React, decoupling frontend clients from core microservices through a high-performance TypeScript API layer. In the Node.js layer I engineered API orchestration, service abstractions and data-transformation middleware, aggregating disparate backend services into optimized, frontend-ready payloads.",
+          "On the AI side, I designed and deployed Model Context Protocol (MCP) servers within the BFF, securely exposing e-commerce catalogs, order management tools and database schemas to GenAI foundation models and internal developer tools. I also architected stateful, multi-agent conversational graphs with LangGraph to handle multi-turn order tracking, returns and exchange workflows.",
+          "To keep delivery consistent, I built a CI/CD-integrated workflow that uses Claude Code to package, commit and open structured pull requests for routine microservice updates, and set up a repository governance layer with CLAUDE.md and REVIEW.md defining architecture patterns, strict type-safety rules and API-routing schemas for automated AI code reviews. That documentation kept autonomous tools and human developers aligned on consistent, low-debt coding standards.",
+        ],
+      },
     ],
   },
   {
-    role: 'Senior Frontend Developer',
     company: 'Infosys',
-    stack: 'React, TypeScript, GraphQL, .NET/C# REST APIs',
-    period: '07/2023 – 11/2024',
-    bullets: [
-      "Led a team of 4-5 developers to take a business problem from idea to release with full ownership, migrating an existing platform to React.js and TypeScript and building a Service Request Platform with role-based, SSO-authenticated, asynchronous approval workflows.",
-      "Architected and developed the platform's .NET/C# REST APIs in the initial phase, designing resource models and API contracts for service requests, approvals and role-based access, and contributing to technical decisions to keep the system maintainable and scalable as it grew.",
-      "Built and versioned the API layer behind the approval workflows with request validation, consistent error handling and SSO-authenticated access, and documented the endpoints so frontend and backend developers could integrate against them independently.",
-      "Set up CI/CD pipelines with GitHub Actions to automate deployments, cutting down manual release effort.",
-      "Continuously improved test coverage and code quality with Jest, resolving production defects and leading peer code reviews.",
+    roles: [
+      {
+        role: 'Senior Frontend Developer',
+        period: '07/2023 – 11/2024',
+        highlights: ['Team Lead', 'Service Request Platform', 'SSO approval workflows', '.NET/C# REST APIs'],
+        stack: ['React', 'TypeScript', 'GraphQL', '.NET', 'C#', 'REST APIs'],
+        paragraphs: [
+          "I led a team of 4-5 developers to take a business problem from idea to release with full ownership, migrating an existing platform to React.js and TypeScript and building a Service Request Platform with role-based, SSO-authenticated, asynchronous approval workflows.",
+          "In the initial phase I architected and developed the platform's .NET/C# REST APIs, designing resource models and API contracts for service requests, approvals and role-based access, and building and versioning the API layer behind the approval workflows with request validation, consistent error handling and SSO-authenticated access. I documented the endpoints so frontend and backend developers could integrate independently, set up CI/CD pipelines with GitHub Actions to automate deployments, and improved test coverage and code quality with Jest while resolving production defects and leading peer code reviews.",
+        ],
+      },
+      {
+        role: 'Senior Systems Engineer',
+        period: '05/2022 – 06/2023',
+        highlights: ['Production Delivery', 'Account Opening Portal', 'Stock Locate Portal', 'API and System Design'],
+        stack: ['React', 'TypeScript', '.NET', 'C#', 'REST APIs', 'SQL'],
+        paragraphs: [
+          "I owned and maintained two FinTech applications in React and TypeScript, lifting user engagement and reliability. I built an Account Opening Portal for financial advisors that cut account-opening turnaround time for external users, and delivered a Stock Locate Portal for tracking the rise and fall of stock prices and performing trading operations.",
+          "On the backend I built .NET/C# REST APIs with JWT/OAuth-based authentication, backed by large relational databases for account-type-based data retrieval. I designed and optimised the data-retrieval endpoints for both portals (query shaping, pagination and response contracts) and covered them with Jest tests ahead of release, keeping frontend-backend integration clean as the system scaled.",
+        ],
+      },
     ],
   },
   {
-    role: 'Senior Systems Engineer',
-    company: 'Infosys',
-    stack: 'React, TypeScript, .NET/C# REST APIs, SQL',
-    period: '05/2022 – 06/2023',
-    bullets: [
-      "Owned and maintained two applications in the FinTech domain in React and TypeScript, lifting user engagement and reliability.",
-      "Engineered .NET/C# REST APIs with JWT/OAuth-based authentication backed by large relational databases for account-type-based data retrieval, keeping frontend-backend integration clean as the system scaled.",
-      "Designed and optimised data-retrieval endpoints for the Account Opening and Stock Locate portals (query shaping, pagination and response contracts) and covered them with automated tests with Jest ahead of release.",
-      "Built an Account Opening Portal for financial advisors, cutting account-opening turnaround time for external users.",
-      "Delivered a Stock Locate Portal to help users track the rise and fall of stock prices and perform trading operations.",
-    ],
-  },
-  {
-    role: 'Project Engineer',
     company: 'Wipro',
-    stack: 'React, Redux, JavaScript, React Native, SAST, DAST, Nexus',
-    period: '06/2019 – 04/2022',
-    bullets: [
-      "Delivered three consecutive releases of VISA Click to Pay in React, Redux and JavaScript for a UK-based banking service, integrating with external payment APIs and async payment flows under strict security and compliance requirements, and shipping a faster, seamless checkout experience to external users.",
-      "Built and maintained the wallet feature and banking workflows (Beneficiaries, Account Status, Loans and User Registration) in React Native and Redux for a UAE mobile banking app serving hundreds of thousands of external users, integrating with core banking services over REST APIs.",
-      "Worked with SAST, DAST and Nexus scans as part of secure release practices for regulated banking releases.",
-      "Resolved production defects by pairing with senior developers to analyse and debug issues across the frontend and API integration layers, tightening the feedback loop between releases.",
+    roles: [
+      {
+        role: 'Project Engineer',
+        period: '06/2019 – 04/2022',
+        highlights: ['3 consecutive releases', 'VISA Click to Pay', 'UAE mobile banking app', 'User Experience'],
+        stack: ['React', 'Redux', 'JavaScript', 'React Native', 'SAST', 'DAST', 'Nexus'],
+        paragraphs: [
+          "I delivered three consecutive releases of VISA Click to Pay in React, Redux and JavaScript for a UK-based banking service, integrating external payment APIs and async payment flows under strict security and compliance requirements and shipping a faster, seamless checkout experience to external users.",
+          "I also built and maintained the wallet feature and banking workflows (Beneficiaries, Account Status, Loans and User Registration) in React Native and Redux for a UAE mobile banking app serving hundreds of thousands of external users, integrating with core banking services over REST APIs. I worked with SAST, DAST and Nexus scans as part of secure release practices for regulated banking releases, and resolved production defects by pairing with senior developers across the frontend and API integration layers.",
+        ],
+      },
     ],
   },
 ]
