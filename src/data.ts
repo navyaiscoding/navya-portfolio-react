@@ -167,7 +167,7 @@ export const experience: ExperienceEntry[] = [
         role: 'Software Engineer',
         period: '11/2024 – 02/2026',
         highlights: ['GenAI', 'BFF architecture', 'MCP servers', 'LangGraph agents', 'Claude Code workflows'],
-        stack: ['React', 'Next.js', 'TypeScript', 'Node.js', 'MCP', 'LangGraph', 'Claude Code', 'GenAI'],
+        stack: ['React', 'Next.js', 'TypeScript', 'Node.js', 'MCP', 'LangGraph', 'Claude Code', 'GenAI', 'Adobe Analytics', 'Tag Analytics'],
         paragraphs: [
           "I architected and delivered a scalable e-commerce platform using a Backend-for-Frontend (BFF) architecture with Next.js and React, decoupling frontend clients from core microservices through a high-performance TypeScript API layer. In the Node.js layer I engineered API orchestration, service abstractions and data-transformation middleware, aggregating disparate backend services into optimized, frontend-ready payloads.",
           "On the AI side, I designed and deployed Model Context Protocol (MCP) servers within the BFF, securely exposing e-commerce catalogs, order management tools and database schemas to GenAI foundation models and internal developer tools. I also architected stateful, multi-agent conversational graphs with LangGraph to handle multi-turn order tracking, returns and exchange workflows.",
@@ -208,7 +208,7 @@ export const experience: ExperienceEntry[] = [
         role: 'Project Engineer',
         period: '06/2019 – 04/2022',
         highlights: ['3 consecutive releases', 'VISA Click to Pay', 'UAE mobile banking app', 'User Experience'],
-        stack: ['React', 'Redux', 'JavaScript', 'React Native', 'SAST', 'DAST', 'Nexus'],
+        stack: ['React', 'Redux', 'JavaScript', 'React Native', 'Adobe Analytics', 'Tag Analytics', 'SAST', 'DAST', 'Nexus'],
         paragraphs: [
           "I delivered three consecutive releases of VISA Click to Pay in React, Redux and JavaScript for a UK-based banking service, integrating external payment APIs and async payment flows under strict security and compliance requirements and shipping a faster, seamless checkout experience to external users.",
           "I also built and maintained the wallet feature and banking workflows (Beneficiaries, Account Status, Loans and User Registration) in React Native and Redux for a UAE mobile banking app serving hundreds of thousands of external users, integrating with core banking services over REST APIs. I worked with SAST, DAST and Nexus scans as part of secure release practices for regulated banking releases, and resolved production defects by pairing with senior developers across the frontend and API integration layers.",
