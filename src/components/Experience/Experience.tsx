@@ -14,8 +14,10 @@ function yearSpan(entry: ExperienceEntry): string {
 }
 
 export default function Experience() {
-  // Steps run oldest -> newest (left to right); open on the most recent employer.
-  const [active, setActive] = useState(experience.length - 1)
+  // Open on Deloitte, whatever order the steps are listed in.
+  const [active, setActive] = useState(() =>
+    Math.max(0, experience.findIndex((e) => e.company === 'Deloitte')),
+  )
   const { ref, className } = useReveal()
   const current = experience[active]
   const multi = current.roles.length > 1
