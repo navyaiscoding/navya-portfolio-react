@@ -14,6 +14,7 @@ on:
 permissions:
   contents: read
   pull-requests: write
+  actions: write
 
 jobs:
   open-pr:
@@ -37,3 +38,7 @@ jobs:
           fi
           # --fill takes the title and description from the branch's commits
           gh pr create --base main --head "$BRANCH" --fill
+
+          # PRs opened with the Actions token don't trigger other workflows, so start the review explicitly
+          pr=$(gh pr list --head "$BRANCH" --base main --state open --json number --jq '.[0].number')
+          gh workflow run claude-review.yml --ref "$BRANCH" -f pr_number="$pr"

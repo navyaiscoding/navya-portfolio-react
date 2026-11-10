@@ -1,0 +1,54 @@
+name: Claude code review
+
+# Claude reviews every PR and posts its findings as a comment.
+# Runs on PR open/update, and is also triggered by auto-pr.yml for PRs it opens
+# (PRs created with the default Actions token don't fire `pull_request` events).
+#
+# One-time setup: repo -> Settings -> Secrets and variables -> Actions ->
+# New repository secret named ANTHROPIC_API_KEY.
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: Pull request number to review
+        required: true
+
+concurrency:
+  group: claude-review-${{ github.event.pull_request.number || inputs.pr_number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+  id-token: write
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Claude review
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            REPO: ${{ github.repository }}
+            PR NUMBER: ${{ github.event.pull_request.number || inputs.pr_number }}
+
+            Review this pull request for a React + Vite + TypeScript portfolio with an
+            Express API in server/ (deployed on Vercel). Use `gh pr diff` and `gh pr view`
+            to read it. Focus on: bugs, security (secrets, input validation, rate limiting),
+            accessibility, TypeScript type safety, and performance. Skip nitpicks.
+
+            Post one summary comment with `gh pr comment`: a short verdict, then the
+            issues found ordered by severity with file and line references.
+          claude_args: |
+            --allowedTools "Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*)"
