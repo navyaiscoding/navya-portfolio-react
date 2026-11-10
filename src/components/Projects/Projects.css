@@ -31,6 +31,9 @@
   .project-media { border-bottom: none; border-right: 1px solid var(--border); }
   .project-media img { aspect-ratio: auto; min-height: 16rem; }
   .project-content { padding: 2rem; justify-content: center; }
+  /* Banner on the right: swap the columns and move the divider to the banner's left edge */
+  .project-card.banner-right { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); }
+  .banner-right .project-media { order: 2; border-right: none; border-left: 1px solid var(--border); }
 }
 .project-card h3 { color: var(--text-bright); font-size: 1.25rem; margin-bottom: 0.5rem; }
 

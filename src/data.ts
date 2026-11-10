@@ -25,6 +25,8 @@ export interface ProjectEntry {
   // Banner shown at the top of the card (hidden if it fails to load)
   imageUrl?: string
   imageAlt?: string
+  /** Put the banner on the right of the card (wide screens) instead of the left */
+  bannerRight?: boolean
   // Small logo shown beside the project name (e.g. the platform it was built on)
   logoUrl?: string
   logoAlt?: string
@@ -144,6 +146,7 @@ export const projects: ProjectEntry[] = [
     logoAlt: 'Built with Lovable',
     imageUrl: '/job-command-center-coming-soon.svg',
     imageAlt: 'Job Command Center: a dashboard sketch with Applications, Resumes and Cover letters panels and a Coming soon label',
+    bannerRight: true,
   },
 ]
 
