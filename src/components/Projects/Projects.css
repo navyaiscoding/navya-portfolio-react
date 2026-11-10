@@ -18,6 +18,7 @@
 
 /* Banner: on top on phones, a left column on wide screens */
 .project-media { border-bottom: 1px solid var(--border); }
+.banner-square .project-media img { aspect-ratio: 1 / 1; max-height: 24rem; margin: 0 auto; }
 .project-media img {
   display: block;
   width: 100%;
@@ -30,6 +31,8 @@
   .project-card.has-banner { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
   .project-media { border-bottom: none; border-right: 1px solid var(--border); }
   .project-media img { aspect-ratio: auto; min-height: 16rem; }
+  .project-card.banner-square { grid-template-columns: minmax(0, 3fr) minmax(0, 6fr); }
+  .project-card.banner-square .project-media img { aspect-ratio: 1 / 1; }
   .project-content { padding: 2rem; justify-content: center; }
 }
 .project-card h3 { color: var(--text-bright); font-size: 1.25rem; margin-bottom: 0.5rem; }

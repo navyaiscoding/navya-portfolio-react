@@ -19,7 +19,7 @@ function ProjectCard({ project, index }: ProjectCardProps) {
 
   return (
     <div
-      className={`project-card ${showImage ? 'has-banner' : ''} ${className}`}
+      className={`project-card ${showImage ? 'has-banner' : ''} ${showImage && project.squareImage ? 'banner-square' : ''} ${className}`}
       ref={ref}
       style={{ transitionDelay: `${index * 60}ms` }}
     >

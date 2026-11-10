@@ -25,6 +25,8 @@ export interface ProjectEntry {
   // Banner shown at the top of the card (hidden if it fails to load)
   imageUrl?: string
   imageAlt?: string
+  /** Banner is a square image: show it uncropped in a narrower column */
+  squareImage?: boolean
   // Small logo shown beside the project name (e.g. the platform it was built on)
   logoUrl?: string
   logoAlt?: string
@@ -142,8 +144,9 @@ export const projects: ProjectEntry[] = [
     stack: ['Lovable SheBuilds Learning Edition', 'In progress'],
     logoUrl: LOVABLE_LOGO,
     logoAlt: 'Built with Lovable',
-    imageUrl: '/job-command-center-coming-soon.svg',
-    imageAlt: 'Job Command Center: a dashboard sketch with Applications, Resumes and Cover letters panels and a Coming soon label',
+    imageUrl: '/shebuilds-accepted.jpg',
+    imageAlt: 'Navya Anumula\'s SheBuilds Learning Edition by Lovable acceptance card',
+    squareImage: true,
   },
 ]
 
