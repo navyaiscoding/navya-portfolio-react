@@ -113,14 +113,14 @@ export const skills: SkillGroup[] = [
 ]
 
 export const coreCompetencies: string[] = [
-  'Frontend Architecture & Design Systems',
-  'Performance & SEO Optimization',
-  'API Design & CMS Integration',
-  'Accessibility (WCAG) & UX Quality',
+  'Fullstack Development & Architecture',
+  'API Design & Integration',
+  '0 -> 1 Product Building',
+  'GenAI & Agentic Development',
   'Figma & Designer Collaboration',
   'Technical Leadership & Mentoring',
   'Stakeholder Engagement & Release Management',
-  'GenAI-Assisted Development',
+  'Accessibility (WCAG) & UX Quality',
 ]
 
 const LOVABLE_LOGO = 'https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg@latest/icons/lovable-color.svg'
