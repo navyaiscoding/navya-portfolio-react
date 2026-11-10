@@ -26,7 +26,7 @@
   object-fit: cover;
 }
 .project-content { padding: 1.5rem; display: flex; flex-direction: column; }
-@media (min-width: 48rem) {
+@media (min-width: 36rem) {
   .project-card.has-banner { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
   .project-media { border-bottom: none; border-right: 1px solid var(--border); }
   .project-media img { aspect-ratio: auto; min-height: 16rem; }
