@@ -1,0 +1,39 @@
+name: Auto-open pull request
+
+# Opens a PR into main whenever you push a branch other than main, so the
+# whole flow is just `git push`. Skips branches that already have an open PR.
+#
+# One-time setup: GitHub repo -> Settings -> Actions -> General -> Workflow
+# permissions -> tick "Allow GitHub Actions to create and approve pull requests".
+
+on:
+  push:
+    branches-ignore:
+      - main
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  open-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create PR if none is open for this branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          BRANCH: ${{ github.ref_name }}
+        run: |
+          open_prs=$(gh pr list --head "$BRANCH" --base main --state open --json number --jq 'length')
+          if [ "$open_prs" != "0" ]; then
+            echo "A PR is already open for $BRANCH; nothing to do."
+            exit 0
+          fi
+          # --fill takes the title and description from the branch's commits
+          gh pr create --base main --head "$BRANCH" --fill
