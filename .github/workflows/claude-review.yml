@@ -28,6 +28,8 @@ permissions:
 
 jobs:
   review:
+    # Paused: skipped until the repo variable CLAUDE_REVIEW_ENABLED is set to 'true'
+    if: vars.CLAUDE_REVIEW_ENABLED == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
