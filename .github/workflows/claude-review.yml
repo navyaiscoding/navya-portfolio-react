@@ -52,4 +52,5 @@ jobs:
             Post one summary comment with `gh pr comment`: a short verdict, then the
             issues found ordered by severity with file and line references.
           claude_args: |
+            --model claude-sonnet-5-5
             --allowedTools "Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*)"
