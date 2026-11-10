@@ -122,3 +122,5 @@ src/
 ## License
 
 MIT
+
+<!-- Test change: checks that pushing opens a PR and Claude reviews it. Safe to delete. -->
