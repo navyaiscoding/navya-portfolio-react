@@ -1,4 +1,3 @@
-import CommandPalette from '../CommandPalette/CommandPalette'
 import ThemeToggle from '../ThemeToggle/ThemeToggle'
 import { type Theme } from '../../hooks'
 import './Nav.css'
@@ -16,7 +15,6 @@ export default function Nav({ theme, toggleTheme }: NavProps) {
           <span className="prompt">~/</span>navya-anumula
         </span>
         <div className="nav-right">
-          <CommandPalette />
           <ThemeToggle theme={theme} toggle={toggleTheme} />
         </div>
       </div>

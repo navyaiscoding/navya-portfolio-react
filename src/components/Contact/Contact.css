@@ -1,4 +1,22 @@
 .contact { text-align: center; }
+/* The whole section sits in one gradient card: accent wash at the top-left fading into the card colour */
+.contact-card {
+  max-width: 50rem;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--border));
+  border-radius: 1rem;
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--accent) 24%, var(--card)) 0%,
+    var(--card) 70%,
+    color-mix(in srgb, var(--accent) 10%, var(--card)) 100%
+  );
+  box-shadow: var(--shadow-lg);
+}
+@media (max-width: 45rem) {
+  .contact-card { padding: 2rem 1.25rem; }
+}
 .contact h2 { font-size: 2.2rem; color: var(--text-bright); margin-bottom: 1.125rem; }
 .contact-intro {
   max-width: 45rem;
