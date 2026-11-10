@@ -16,7 +16,6 @@ Personal developer portfolio. Senior Frontend Engineer specializing in React, An
 - Animated, scrolling code-snippet background rendered from real snippets used in this app
 - Hero includes a browser-chrome-framed code mockup that types itself out live from real profile/skills data
 - Floating bottom Section Dock — icon tiles for About/Competencies/Skills/Experience/Contact, always visible, current section highlighted via scroll-spy. Replaces the old top navbar entirely
-- Command palette (`⌘K` / `Ctrl+K` or `/`) for jumping to any section
 - Scroll-reveal animations on sections and cards
 - Typewriter hero intro that cycles through role titles
 - Core Competencies grid, fetched live from a Node/Express API (`/api/competencies`) with a skeleton loading state and a silent fallback to static data if the request fails
@@ -96,9 +95,8 @@ src/
   main.tsx                    app entry point
 
   components/                 one folder per component, each with its own co-located .css
-    Nav/                       top bar — logo, command palette trigger, theme toggle
+    Nav/                       top bar — logo, theme toggle
     SectionDock/               floating bottom nav — icon tiles, active-section highlighting
-    CommandPalette/            ⌘K / "/" command palette
     ThemeToggle/                light/dark switch
     Hero/                      intro + HeroCodeMockup (self-typing code panel)
     About/                     bio section

@@ -16,19 +16,18 @@ export interface SkillGroup {
   items: string[]
 }
 
-export interface NavSearchItem {
-  id: string
-  label: string
-  group: string
-  keywords: string
-}
-
 export interface ProjectEntry {
   name: string
   description: string
   stack: string[]
   liveUrl?: string
   repoUrl?: string
+  // Banner shown at the top of the card (hidden if it fails to load)
+  imageUrl?: string
+  imageAlt?: string
+  // Small logo shown beside the project name (e.g. the platform it was built on)
+  logoUrl?: string
+  logoAlt?: string
 }
 
 export interface CertificationEntry {
@@ -122,16 +121,7 @@ export const coreCompetencies: string[] = [
   'GenAI-Assisted Development',
 ]
 
-export const navSearchItems: NavSearchItem[] = [
-  { id: 'top', label: 'Home', group: 'Sections', keywords: 'home top hero start' },
-  { id: 'about', label: 'About', group: 'Sections', keywords: 'about summary bio' },
-  { id: 'competencies', label: 'Core Competencies', group: 'Sections', keywords: 'competencies strengths capabilities' },
-  { id: 'skills', label: 'Skills', group: 'Sections', keywords: 'skills tech stack' },
-  { id: 'projects', label: 'Projects', group: 'Sections', keywords: 'projects side projects work portfolio' },
-  { id: 'experience', label: 'Experience', group: 'Sections', keywords: 'experience work history jobs' },
-  { id: 'certifications', label: 'Certifications', group: 'Sections', keywords: 'certifications certificates badges courses credentials' },
-  { id: 'contact', label: 'Contact', group: 'Sections', keywords: 'contact email message reach out' },
-]
+const LOVABLE_LOGO = 'https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg@latest/icons/lovable-color.svg'
 
 export const projects: ProjectEntry[] = [
   {
@@ -139,6 +129,21 @@ export const projects: ProjectEntry[] = [
     description: 'A gentle wellness companion for building daily rhythm — set your own reminders, track habits, and get a weekly AI insight. Built and shipped in under 72 hours for Lovable SheBuilds Season 04, where around 800 of roughly 3,300 applicants were accepted, and shaped by a survey of women.',
     stack: ['Lovable SheBuilds S04', 'Built with Lovable'],
     liveUrl: 'https://reritam-wellness.lovable.app/',
+    logoUrl: LOVABLE_LOGO,
+    logoAlt: 'Built with Lovable',
+    // The app's own social-preview image. Save a copy under public/ and point
+    // this at it (e.g. '/reritam-banner.png') so it can't disappear if the app is republished.
+    imageUrl: 'https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/lovp_2245pvtf119tzty9xrvhvcdgcf/85567a47eaef91732de582069d4dd5c7_1792278487472.png',
+    imageAlt: 'ReRitam landing page: "Find your rhythm again" beside a soft lilac butterfly',
+  },
+  {
+    name: 'Job Command Center',
+    description: 'Accepted into the SheBuilds Learning Edition alongside 5,000 other builders, where I\'ll be building a job command center to track every job application, resume and cover letter in one place.',
+    stack: ['Lovable SheBuilds Learning Edition', 'In progress'],
+    logoUrl: LOVABLE_LOGO,
+    logoAlt: 'Built with Lovable',
+    imageUrl: '/job-command-center-coming-soon.svg',
+    imageAlt: 'Job Command Center: a dashboard sketch with Applications, Resumes and Cover letters panels and a Coming soon label',
   },
 ]
 
