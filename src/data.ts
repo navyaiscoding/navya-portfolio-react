@@ -130,7 +130,7 @@ const LOVABLE_LOGO = 'https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg@lat
 export const projects: ProjectEntry[] = [
   {
     name: 'Neatly',
-    description: 'A warm, calm job-search tracker that turns job-search chaos into momentum: a kanban board for applications, tailored resumes and cover letters, fit checks and follow-up reminders. Each user\'s data is private through Supabase row-level security, resumes are parsed in the browser from PDF and Word files, and optional AI drafts tailored pitches.',
+    description: 'A warm, calm job-search tracker that turns job-search chaos into momentum: a kanban board for applications, tailored resumes and cover letters, fit checks and follow-up reminders. Each user\'s data is private through Supabase row-level security, resumes are parsed in the browser from PDF and Word files, and optional AI drafts tailored pitches. It began as an idea for the SheBuilds Learning Edition, and I kept building it as my own personal project.',
     stack: [
       'Lovable SheBuilds Learning Edition',
       'React',
