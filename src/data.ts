@@ -132,6 +132,7 @@ export const projects: ProjectEntry[] = [
     name: 'Neatly',
     description: 'A warm, calm job-search tracker that turns job-search chaos into momentum: a kanban board for applications, tailored resumes and cover letters, fit checks and follow-up reminders. Each user\'s data is private through Supabase row-level security, resumes are parsed in the browser from PDF and Word files, and optional AI drafts tailored pitches.',
     stack: [
+      'Lovable SheBuilds Learning Edition',
       'React',
       'TypeScript',
       'TanStack Start',
