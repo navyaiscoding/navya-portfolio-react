@@ -30,6 +30,8 @@ export interface ProjectEntry {
   // Small logo shown beside the project name (e.g. the platform it was built on)
   logoUrl?: string
   logoAlt?: string
+  /** Logo already spells the project name: show it wide, in place of the text title */
+  logoWordmark?: boolean
 }
 
 export interface CertificationEntry {
@@ -142,8 +144,9 @@ export const projects: ProjectEntry[] = [
       'Vercel',
     ],
     liveUrl: 'https://useneatly.vercel.app/',
-    logoUrl: LOVABLE_LOGO,
-    logoAlt: 'Built with Lovable',
+    logoUrl: '/neatly-logo.png',
+    logoAlt: 'Neatly',
+    logoWordmark: true,
     imageUrl: '/neatly-banner.jpg',
     imageAlt: 'Neatly landing page: "Turn job-search chaos into momentum" above a kanban board of applications with a fit-check score and resume card',
   },

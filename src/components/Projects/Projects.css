@@ -39,6 +39,8 @@
 
 .project-title { display: flex; align-items: center; gap: 0.625rem; }
 .project-logo { width: 1.75rem; height: 1.75rem; object-fit: contain; flex-shrink: 0; }
+.project-logo-wordmark { width: auto; height: 2.5rem; }
+.project-title .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 .project-description {
   color: var(--text);
