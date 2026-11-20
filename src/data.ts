@@ -159,16 +159,6 @@ export const projects: ProjectEntry[] = [
     imageUrl: 'https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/lovp_2245pvtf119tzty9xrvhvcdgcf/85567a47eaef91732de582069d4dd5c7_1792278487472.png',
     imageAlt: 'ReRitam landing page: "Find your rhythm again" beside a soft lilac butterfly',
   },
-  {
-    name: 'Job Command Center',
-    description: 'Accepted into the SheBuilds Learning Edition alongside 5,000 other builders, where I\'ll be building a job command center to track every job application, resume and cover letter in one place.',
-    stack: ['Lovable SheBuilds Learning Edition', 'In progress'],
-    logoUrl: LOVABLE_LOGO,
-    logoAlt: 'Built with Lovable',
-    imageUrl: '/job-command-center-coming-soon.svg',
-    imageAlt: 'Job Command Center: a dashboard sketch with Applications, Resumes and Cover letters panels and a Coming soon label',
-    bannerRight: true,
-  },
 ]
 
 export const certifications: CertificationEntry[] = [
