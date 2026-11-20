@@ -37,14 +37,14 @@ function ProjectCard({ project, index }: ProjectCardProps) {
         <h3 className="project-title">
           {showLogo && (
             <img
-              className="project-logo"
+              className={`project-logo ${project.logoWordmark ? 'project-logo-wordmark' : ''}`}
               src={project.logoUrl}
               alt={project.logoAlt ?? ''}
               title={project.logoAlt}
               onError={() => setLogoFailed(true)}
             />
           )}
-          {project.name}
+          {showLogo && project.logoWordmark ? <span className="sr-only">{project.name}</span> : project.name}
         </h3>
         <p className="project-description">{project.description}</p>
         <ul className="project-tags">

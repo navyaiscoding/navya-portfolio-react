@@ -30,6 +30,8 @@ export interface ProjectEntry {
   // Small logo shown beside the project name (e.g. the platform it was built on)
   logoUrl?: string
   logoAlt?: string
+  /** Logo already spells the project name: show it wide, in place of the text title */
+  logoWordmark?: boolean
 }
 
 export interface CertificationEntry {
@@ -127,6 +129,29 @@ const LOVABLE_LOGO = 'https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg@lat
 
 export const projects: ProjectEntry[] = [
   {
+    name: 'Neatly',
+    description: 'A warm, calm job-search tracker that turns job-search chaos into momentum: a kanban board for applications, tailored resumes and cover letters, fit checks and follow-up reminders. Each user\'s data is private through Supabase row-level security, resumes are parsed in the browser from PDF and Word files, and optional AI drafts tailored pitches. It began as an idea for the SheBuilds Learning Edition, and I kept building it as my own personal project.',
+    stack: [
+      'Lovable SheBuilds Learning Edition',
+      'React',
+      'TypeScript',
+      'TanStack Start',
+      'Tailwind CSS',
+      'shadcn/ui',
+      'Supabase',
+      'Drizzle',
+      'Three.js',
+      'Vitest',
+      'Vercel',
+    ],
+    liveUrl: 'https://useneatly.vercel.app/',
+    logoUrl: '/neatly-logo.png',
+    logoAlt: 'Neatly',
+    logoWordmark: true,
+    imageUrl: '/neatly-banner.jpg',
+    imageAlt: 'Neatly landing page: "Turn job-search chaos into momentum" above a kanban board of applications with a fit-check score and resume card',
+  },
+  {
     name: 'ReRitam',
     description: 'A gentle wellness companion for building daily rhythm — set your own reminders, track habits, and get a weekly AI insight. Built and shipped in under 72 hours for Lovable SheBuilds Season 04, where around 800 of roughly 3,300 applicants were accepted, and shaped by a survey of women.',
     stack: ['Lovable SheBuilds S04', 'Built with Lovable'],
@@ -137,16 +162,6 @@ export const projects: ProjectEntry[] = [
     // this at it (e.g. '/reritam-banner.png') so it can't disappear if the app is republished.
     imageUrl: 'https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/lovp_2245pvtf119tzty9xrvhvcdgcf/85567a47eaef91732de582069d4dd5c7_1792278487472.png',
     imageAlt: 'ReRitam landing page: "Find your rhythm again" beside a soft lilac butterfly',
-  },
-  {
-    name: 'Job Command Center',
-    description: 'Accepted into the SheBuilds Learning Edition alongside 5,000 other builders, where I\'ll be building a job command center to track every job application, resume and cover letter in one place.',
-    stack: ['Lovable SheBuilds Learning Edition', 'In progress'],
-    logoUrl: LOVABLE_LOGO,
-    logoAlt: 'Built with Lovable',
-    imageUrl: '/job-command-center-coming-soon.svg',
-    imageAlt: 'Job Command Center: a dashboard sketch with Applications, Resumes and Cover letters panels and a Coming soon label',
-    bannerRight: true,
   },
 ]
 
