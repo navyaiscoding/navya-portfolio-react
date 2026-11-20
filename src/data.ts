@@ -127,6 +127,27 @@ const LOVABLE_LOGO = 'https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg@lat
 
 export const projects: ProjectEntry[] = [
   {
+    name: 'Neatly',
+    description: 'A warm, calm job-search tracker that turns job-search chaos into momentum: a kanban board for applications, tailored resumes and cover letters, fit checks and follow-up reminders. Each user\'s data is private through Supabase row-level security, resumes are parsed in the browser from PDF and Word files, and optional AI drafts tailored pitches.',
+    stack: [
+      'React',
+      'TypeScript',
+      'TanStack Start',
+      'Tailwind CSS',
+      'shadcn/ui',
+      'Supabase',
+      'Drizzle',
+      'Three.js',
+      'Vitest',
+      'Vercel',
+    ],
+    liveUrl: 'https://useneatly.vercel.app/',
+    logoUrl: LOVABLE_LOGO,
+    logoAlt: 'Built with Lovable',
+    imageUrl: '/neatly-banner.jpg',
+    imageAlt: 'Neatly landing page: "Turn job-search chaos into momentum" above a kanban board of applications with a fit-check score and resume card',
+  },
+  {
     name: 'ReRitam',
     description: 'A gentle wellness companion for building daily rhythm — set your own reminders, track habits, and get a weekly AI insight. Built and shipped in under 72 hours for Lovable SheBuilds Season 04, where around 800 of roughly 3,300 applicants were accepted, and shaped by a survey of women.',
     stack: ['Lovable SheBuilds S04', 'Built with Lovable'],
